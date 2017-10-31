@@ -1,21 +1,29 @@
-from django.core.management.base import BaseCommand, CommandError
-from mm.models import Alter
+from django.core.management.base import BaseCommand
+from mm.models import Sector, Alter
+import csv
 import argparse
+
 
 class Command(BaseCommand):
     help = 'Load alters from csv'
 
     def add_arguments(self, parser):
-        parser.add_argument('csv', type=argparse.FileType('r'))
+        parser.add_argument('csv', type=argparse.FileType('r'),
+                            help='egonet_type CSV file')
 
     def handle(self, *args, **options):
-        for alter_id in options['poll_id']:
-            try:
-                poll = Poll.objects.get(pk=poll_id)
-            except Poll.DoesNotExist:
-                raise CommandError('Poll "%s" does not exist' % poll_id)
+        reader = csv.DictReader(options['csv'])
+        for row in reader:
+            sector_name = row['TYPE']
+            s, created = Sector.objects.get_or_create(name=sector_name)
+            if created:
+                self.stdout.write("created sector %s" % s)
+            else:
+                self.stdout.write("found sector %s" % s)
 
-            poll.opened = False
-            poll.save()
-
-            self.stdout.write(self.style.SUCCESS('Successfully closed poll "%s"' % poll_id))
+            alter_name = row['ITEM']
+            a, created = Alter.objects.get_or_create(name=alter_name, sector=s)
+            if created:
+                self.stdout.write("created alter %s" % a)
+            else:
+                self.stdout.write("found alter %s" % a)
