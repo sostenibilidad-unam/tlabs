@@ -52,6 +52,9 @@ class EgoEdge(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=100)
 
+    class Meta:
+        verbose_name = "Categories"
+
     def __unicode__(self):
         return u"!%s" % self.name
 
@@ -72,8 +75,11 @@ class Agency(models.Model):
                                related_name='actor_set',
                                null=True)
 
+    class Meta:
+        verbose_name = "Agencies"
+
     def __unicode__(self):
-        return u"%%s->%s" % (self.alter, self.accion)
+        return u"%s->%s" % (self.alter, self.action)
 
 
 class MentalType(models.Model):
