@@ -39,11 +39,19 @@ class EgoEdge(models.Model):
         return u"%s<-%s->%s" % (self.source, self.distance, self.target)
 
 
-class Action(models.Model):
-    accion = models.CharField(max_length=200)
+class Category(models.Model):
+    name = models.CharField(max_length=100)
 
     def __unicode__(self):
-        return u"!%s" % self.accion
+        return u"!%s" % self.name
+
+
+class Action(models.Model):
+    action = models.CharField(max_length=200)
+    category = models.ForeignKey(Category, null=True)
+
+    def __unicode__(self):
+        return u"!%s" % self.action
 
 
 class Agency(models.Model):
@@ -66,7 +74,11 @@ class MentalType(models.Model):
 
 
 class Item(models.Model):
-    type = models.ForeignKey(MentalType)
+    name = models.CharField(max_length=200)
+    mental_type = models.ForeignKey(MentalType)
+
+    def __unicode__(self):
+        return u"%s" % self.name
 
 
 class MentalEdge(models.Model):
@@ -76,3 +88,6 @@ class MentalEdge(models.Model):
     target = models.ForeignKey(Item,
                                related_name='caused_by',
                                null=True)
+
+    def __unicode__(self):
+        return u"(%s)->(%s)" % (self.source, self.target)
