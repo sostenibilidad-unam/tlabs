@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import json
+import networkx as nx
 
 from django.db import models
 
@@ -23,6 +25,14 @@ class Alter(models.Model):
     type = models.ForeignKey(Type, null=True)
     sector = models.ForeignKey(Sector, null=True)
     desc = models.TextField(blank=True)
+
+    def mental_model(self):
+        g = nx.Graph()
+
+        for e in self.mentaledge_set.all():
+            g.add_edge(e.source.name,
+                       e.target.name)
+        return json.dumps(nx.node_link_data(g), indent=2)
 
     def __unicode__(self):
         return u"%s" % self.name
