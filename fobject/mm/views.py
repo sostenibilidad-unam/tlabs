@@ -23,9 +23,22 @@ def ego_net_json(request, ego_id):
     return HttpResponse(json.dumps(nx.node_link_data(g), indent=2))
 
 
-def ego_net(request, ego_id):
+def mm_net_json(request, ego_id):
     ego = Alter.objects.get(id=ego_id)
-    context = {'ego_id': ego_id,
-               'ego': ego,
+
+    g = nx.Graph()
+
+    for e in ego.ego_net.all():
+        g.add_edge(e.source.name,
+                   e.target.name,
+                   distance=e.distance,
+                   interaction=e.interaction)
+
+    return HttpResponse(json.dumps(nx.node_link_data(g), indent=2))
+
+
+def ego_nets(request, ego_id):
+    ego = Alter.objects.get(id=ego_id)
+    context = {'ego': ego,
                'alters': Alter.objects.all()}
     return render(request, 'ego_net.html', context)

@@ -20,6 +20,6 @@ from mm import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
-    url(r'^ego/(?P<ego_id>[0-9]+)/$', views.ego_net, name='ego_net'),
+    url(r'^ego/(?P<ego_id>[0-9]+)/$', views.ego_nets, name='ego_nets'),
     url(r'^ego_json/(?P<ego_id>[0-9]+)/$', views.ego_net_json, name='ego_net'),
 ]

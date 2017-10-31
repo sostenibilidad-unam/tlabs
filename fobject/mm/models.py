@@ -82,6 +82,7 @@ class Item(models.Model):
 
 
 class MentalEdge(models.Model):
+    ego = models.ForeignKey(Alter, null=True)
     source = models.ForeignKey(Item,
                                related_name='leads_to',
                                null=True)

@@ -11,7 +11,8 @@
   stroke-width: 1.5px;
   }
 </style>
-<svg width="960" height="600"></svg>
+<svg width="960" height="600" id="egonet"></svg>
+
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
 
@@ -28,7 +29,7 @@
   .force("center", d3.forceCenter(width / 2, height / 2));
 
 
-  d3.json("/ego_json/{{ ego_id }}", function(error, graph) {
+  d3.json("/ego_json/{{ ego.id }}", function(error, graph) {
   if (error) throw error;
 
   var link = svg.append("g")
@@ -105,6 +106,7 @@
   }
 
 </script>
+
 <h1>{{ ego.name }}</h1>
 <p>
   {{ ego.desc }}
