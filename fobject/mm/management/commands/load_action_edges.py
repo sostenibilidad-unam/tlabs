@@ -18,7 +18,7 @@ class Command(BaseCommand):
                 source_name = row['SOURCE']
                 alter = Alter.objects.get(name=source_name)
             except:
-                self.stdout.write("NO ENCONTRAR %s" % source_name)
+                self.stderr.write("NO ENCONTRAR %s" % source_name)
 
             target_name = row['TARGET']
             action, created = Action.objects.get_or_create(action=target_name)
