@@ -53,7 +53,7 @@ class Category(models.Model):
     name = models.CharField(max_length=100)
 
     class Meta:
-        verbose_name = "Categories"
+        verbose_name_plural = "Categories"
 
     def __unicode__(self):
         return u"!%s" % self.name
@@ -76,7 +76,7 @@ class Agency(models.Model):
                                null=True)
 
     class Meta:
-        verbose_name = "Agencies"
+        verbose_name_plural = "Agencies"
 
     def __unicode__(self):
         return u"%s->%s" % (self.alter, self.action)
