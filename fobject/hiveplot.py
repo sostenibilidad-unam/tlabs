@@ -9,7 +9,12 @@ if __name__ == '__main__':
     django.setup()
 
 
-from mm.models import Alter, Action, Sector, Agency
+from mm.models import Alter, Action, Sector, Agency, Networks
+
+#n = Networks()
+#n.update_alter_metrics()
+#n.update_action_metrics()
+
 from math import sin, cos, radians
 from pyveplot import Hiveplot, Node, Axis
 
@@ -72,12 +77,12 @@ h.axes = [axis_egos, axis_alters, axis_actions]
 
 # place ego nodes on ego axis
 j = 0.0
-for e in Alter.objects.filter(sector=ego).all():
+for e in Alter.objects.filter(sector=ego).order_by('degree').all():
     j += 0.94
     n = Node(e)
     axis_egos.add_node(n, j / ego_count)
     n.dwg = n.dwg.circle(center=(n.x, n.y),
-                         r=7,
+                         r=e.degree,
                          stroke_width=0,
                          fill='darkred',
                          fill_opacity=0.8)
@@ -86,31 +91,29 @@ for e in Alter.objects.filter(sector=ego).all():
 
 # place alter nodes on alter axis
 j = 0.0
-for e in Alter.objects.exclude(sector=ego).all():
+for e in Alter.objects.exclude(sector=ego).order_by('degree').all():
     j += 1.0
     n = Node(e)
     axis_alters.add_node(n, j / alter_count)
     n.dwg = n.dwg.circle(center=(n.x, n.y),
-                         r=3,
+                         r=e.degree*8,
                          stroke_width=0,
                          fill='darkgrey',
                          fill_opacity=0.9)
 
 
-
-
-
 # place action nodes on action axis
 j = 0.0
-for e in Action.objects.all():
+for action in Action.objects.order_by('in_degree'):
     j += 0.99
-    n = Node(e)
+    n = Node(action)
     axis_actions.add_node(n, j / action_count)
-   
-    n.dwg = n.dwg.rect(insert = (n.x - 4, n.y - 4),
-                       size   = (8, 8),
+    size = action.in_degree * 6
+    n.dwg = n.dwg.rect(insert = (n.x - size/2.0,
+                                 n.y - size/2.0),
+                       size   = (size, size),
                        fill   = 'midnightblue',
-                       fill_opacity = 0.5,
+                       fill_opacity = 0.6,
                        stroke_width = 0.5)
 
 
@@ -128,7 +131,6 @@ for e in Alter.objects.filter(sector=ego).all():
     for edge in e.ego_net.all():
         a = edge.target
         if a in axis_alters.nodes:
-            print e, edge.distance, a 
             h.connect(axis_egos, e,
                       20,
                       axis_alters, a,

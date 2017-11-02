@@ -26,6 +26,8 @@ class Alter(models.Model):
     sector = models.ForeignKey(Sector, null=True)
     desc = models.TextField(blank=True)
 
+    degree = models.IntegerField(default=0)
+    
     def mental_model(self):
         g = nx.Graph()
 
@@ -62,6 +64,11 @@ class Category(models.Model):
 class Action(models.Model):
     action = models.CharField(max_length=200)
     category = models.ForeignKey(Category, null=True)
+
+    in_degree = models.IntegerField(default=0)
+
+    def update_in_degree(self):
+        self.in_degree = self.actor_set.count()
 
     def __unicode__(self):
         return u"!%s" % self.action
@@ -108,3 +115,28 @@ class MentalEdge(models.Model):
 
     def __unicode__(self):
         return u"(%s)->(%s)" % (self.source, self.target)
+
+
+
+
+class Networks:
+    def __init__(self):
+
+        self.alter = nx.Graph()
+
+        for e in EgoEdge.objects.all():
+            self.alter.add_edge(e.source, e.target,
+                                distance=e.distance,
+                                interaction=e.interaction)
+
+    def update_alter_metrics(self):
+        degrees = list(self.alter.degree())
+        for node in degrees:
+            node[0].degree = node[1]
+            node[0].save()
+
+
+    def update_action_metrics(self):
+        for a in Action.objects.all():
+            a.update_in_degree()
+            a.save()
