@@ -18,14 +18,14 @@ class Command(BaseCommand):
             item_type = row['TYPE']
             t, created = MentalType.objects.get_or_create(name=item_type)
             if created:
-                self.stdout.write("created type %s" % t)
+                self.stdout.write("%s: created type %s" % (options['csv'].name, t))
             else:
-                self.stdout.write("found type %s" % t)
+                self.stdout.write("%s: found type %s" % (options['csv'].name, t))
 
             item_name = row['ITEM']
             i, created = Item.objects.get_or_create(name=item_name,
                                                     mental_type=t)
             if created:
-                self.stdout.write("created item %s" % i)
+                self.stdout.write("%s: created item %s" % (options['csv'].name, i))
             else:
-                self.stdout.write("found item %s" % i)
+                self.stdout.write("%s: found item %s" % (options['csv'].name, i))

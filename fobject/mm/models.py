@@ -91,7 +91,7 @@ class MentalType(models.Model):
 
 class Item(models.Model):
     name = models.CharField(max_length=200)
-    mental_type = models.ForeignKey(MentalType)
+    mental_type = models.ForeignKey(MentalType, null=True)
 
     def __unicode__(self):
         return u"%s" % self.name

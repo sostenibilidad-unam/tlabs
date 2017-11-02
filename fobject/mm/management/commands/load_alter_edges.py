@@ -19,16 +19,16 @@ class Command(BaseCommand):
             source_name = row['SOURCE']
             s, created = Alter.objects.get_or_create(name=source_name)
             if created:
-                self.stdout.write("created alter %s" % s)
+                self.stdout.write("%s: created alter %s" % (options['csv'].name, s))
             else:
-                self.stdout.write("found alter %s" % s)
+                self.stdout.write("%s: found alter %s" % (options['csv'].name, s))
 
             target_name = row['TARGET']
             t, created = Alter.objects.get_or_create(name=target_name)
             if created:
-                self.stdout.write("created alter %s" % t)
+                self.stdout.write("%s: created alter %s" % (options['csv'].name, t))
             else:
-                self.stdout.write("found alter %s" % t)
+                self.stdout.write("%s: found alter %s" % (options['csv'].name, t))
 
             e = EgoEdge(source=s, target=t,
                         interaction=row['INTERACTION'],

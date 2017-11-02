@@ -17,13 +17,13 @@ class Command(BaseCommand):
             sector_name = row['TYPE']
             s, created = Sector.objects.get_or_create(name=sector_name)
             if created:
-                self.stdout.write("created sector %s" % s)
+                self.stdout.write("%s: created sector %s" % (options['csv'].name, s))
             else:
-                self.stdout.write("found sector %s" % s)
+                self.stdout.write("%s: found sector %s" % (options['csv'].name, s))
 
             alter_name = row['ITEM']
             a, created = Alter.objects.get_or_create(name=alter_name, sector=s)
             if created:
-                self.stdout.write("created alter %s" % a)
+                self.stdout.write("%s: created alter %s" % (options['csv'].name, a))
             else:
-                self.stdout.write("found alter %s" % a)
+                self.stdout.write("%s: found alter %s" % (options['csv'].name, a))
