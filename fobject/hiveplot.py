@@ -115,6 +115,9 @@ for e in Action.objects.all():
 
 
 
+ego_color = {1: 'forestgreen',
+             3: 'gold',
+             2: 'greenyellow'}
     
 # grab egos
 for e in Alter.objects.filter(sector=ego).all():
@@ -122,14 +125,14 @@ for e in Alter.objects.filter(sector=ego).all():
     for edge in e.ego_net.all():
         a = edge.target
         if a in axis_alters.nodes:
-            print e, a        
+            print e, edge.distance, a 
             h.connect(axis_egos, e,
                       20,
                       axis_alters, a,
                       -45,
-                      stroke_width=0.6,
-                      stroke_opacity=0.99,
-                      stroke='limegreen')
+                      stroke_width=1,
+                      stroke_opacity=1,
+                      stroke=ego_color[edge.distance],)
                   
 
 
