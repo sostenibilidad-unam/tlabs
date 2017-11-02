@@ -73,7 +73,7 @@ h.axes = [axis_egos, axis_alters, axis_actions]
 # place ego nodes on ego axis
 j = 0.0
 for e in Alter.objects.filter(sector=ego).all():
-    j += 0.9
+    j += 0.94
     n = Node(e)
     axis_egos.add_node(n, j / ego_count)
     n.dwg = n.dwg.circle(center=(n.x, n.y),
@@ -116,8 +116,11 @@ for e in Action.objects.all():
 
 
 ego_color = {1: 'forestgreen',
-             3: 'gold',
-             2: 'greenyellow'}
+             2: 'greenyellow',
+             3: 'goldenrod',
+             4: 'gold'}
+             
+             
     
 # grab egos
 for e in Alter.objects.filter(sector=ego).all():
@@ -145,7 +148,7 @@ for a in Agency.objects.all():
                   -10,
                   stroke_width=0.6,
                   stroke_opacity=0.99,
-                  stroke='orange')
+                  stroke='darkslategrey')
                   
             
 h.save()

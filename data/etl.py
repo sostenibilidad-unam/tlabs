@@ -1,10 +1,12 @@
 command = "python ../fobject/manage.py"
 
 subcommands = [
+    'load_sectors',   #  egonet_type    
     'load_alter_edges',  #  egonet
-#    'load_sectors',   #  egonet_type
-#    'load_mental_items',  #  mm types
     'load_action_edges', # agency
+    
+#    'load_mental_items',  #  mm types
+
 ]
 
 
@@ -28,15 +30,17 @@ keys = [
     '016',
     '017' ]
 
+keys = ["%03i" % n for n in range(1,18)]
+
 for sc in subcommands:
     for k in keys:
         print "%s %s joined/TL%s_%s" % (command, sc, k, suffix[sc])
 
 
-for k in keys:
-    print "%s load_mental_edges --ego TL%s --csv joined/TL%s_%s" % (command,
-                                                                  k, k,
-                                                                  suffix['load_mental_edges'])
+# for k in keys:
+#     print "%s load_mental_edges --ego TL%s --csv joined/TL%s_%s" % (command,
+#                                                                   k, k,
+#                                                                   suffix['load_mental_edges'])
 
 
         
