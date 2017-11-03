@@ -12,14 +12,14 @@ Transofrmation Labs
    - Otros: gold
    - Privado: orangered
    - Sociedad_Civil: deeppink
-   - Sociedad_Civil: deeppink
-   - None: blue <--- *algunos alters no tienen sector*
+   - None: blue <-- **algunos alters no tienen sector**
  3. Cuadros azules son acciones, van ordenadas hacia afuera por in_degree.
 
 
 ## Vínculos
 
-Unen a los ejes 1 y 2 vínculos cuyos colores representan la distancia:
+Unen a los ejes 1 y 2 vínculos cuyos colores representan la
+distancia. Entre más oscuro, menor distancia:
 
  - distancia 1: forestgreen
  - distancia 2: greenyellow
