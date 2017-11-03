@@ -5,15 +5,18 @@ Transofrmation Labs
 ## Hiveplot
 
 ### Ejes y nodos
+
  1. Los círculos rojos son Egos, van ordenados por grado de conectividad.
- 2. Sobre el eje gris, en orden de conectividad, Alters. Sus colores representan su sector:
+ 2. Sobre el eje gris, en orden de conectividad, Alters. Sus [colores](http://www.december.com/html/spec/colorsvg.html) representan su sector:
+
    - Academia: forestgreen
    - Gobierno: greenyellow
    - Otros: gold
    - Privado: orangered
    - Sociedad_Civil: deeppink
    - None: blue <-- **algunos alters no tienen sector**
- 3. Cuadros azules son acciones, van ordenadas hacia afuera por in_degree.
+
+3. Cuadros azules son acciones, van ordenadas hacia afuera por in_degree.
 
 
 ## Vínculos
