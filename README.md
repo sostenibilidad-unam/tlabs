@@ -7,7 +7,7 @@ Transofrmation Labs
 ### Ejes y nodos
 
  1. Los círculos rojos son Egos, van ordenados por grado de conectividad.
- 2. Sobre el eje gris, en orden de conectividad, Alters. Sus [colores](http://www.december.com/html/spec/colorsvg.html) representan su sector:
+ 2. Sobre el eje gris, en orden de conectividad, Alters cuyos [colores](http://www.december.com/html/spec/colorsvg.html) representan su sector:
 
    - Academia: forestgreen
    - Gobierno: greenyellow
@@ -19,7 +19,7 @@ Transofrmation Labs
 3. Cuadros azules son acciones, van ordenadas hacia afuera por in_degree.
 
 
-## Vínculos
+### Vínculos
 
 Unen a los ejes 1 y 2 vínculos cuyos colores representan la
 distancia. Entre más oscuro, menor distancia:
