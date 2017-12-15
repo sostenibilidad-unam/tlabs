@@ -11,16 +11,16 @@ if __name__ == '__main__':
 
 from mm.models import Alter, Action, Sector, Agency, Networks
 
-#n = Networks()
-#n.update_alter_metrics()
-#n.update_action_metrics()
+n = Networks()
+n.update_alter_metrics()
+n.update_action_metrics()
 
 from math import sin, cos, radians
 from scale import Scale
 from pyveplot import Hiveplot, Node, Axis
 
 
-h = Hiveplot( 'agency.svg')
+h = Hiveplot('agency.svg')
 
 
 def rotate(radius, angle, origin=(0, 0)):
@@ -40,7 +40,8 @@ ego_count = Alter.objects.filter(sector=ego).count()
 ego_scale = Scale(domain=[Alter.objects.order_by('degree')[0].degree,
                           Alter.objects.order_by('-degree')[0].degree],
                   range=[5, 30])
-ego_axis_len = sum([ego_scale.linear(e.degree)*2.0 for e in Alter.objects.filter(sector=ego).all()])
+ego_axis_len = sum([ego_scale.linear(e.degree)*2.0
+                    for e in Alter.objects.filter(sector=ego).all()])
 
 ego_axis_origin = rotate(offcenter,
                          angle=rotation,
@@ -53,12 +54,14 @@ axis_egos = Axis(ego_axis_origin,
                  stroke_opacity="1", stroke_width=2)
 
 
-
 alter_count = Alter.objects.exclude(sector=ego).count()
-alter_scale = Scale(domain=[Alter.objects.exclude(sector=ego).order_by('degree')[0].degree,
-                            Alter.objects.exclude(sector=ego).order_by('-degree')[0].degree],
-                  range=[5, 30])
-alter_axis_len = sum([alter_scale.linear(e.degree) for e in Alter.objects.exclude(sector=ego).all()])
+alter_scale = Scale(
+    domain=[Alter.objects.exclude(sector=ego).order_by('degree')[0].degree,
+            Alter.objects.exclude(sector=ego).order_by('-degree')[0].degree],
+    range=[5, 50])
+
+alter_axis_len = sum([alter_scale.linear(e.degree)
+                      for e in Alter.objects.exclude(sector=ego).all()])
 
 alter_axis_origin = rotate(offcenter,
                            angle=rotation + 135,
@@ -71,13 +74,14 @@ axis_alters = Axis(alter_axis_origin,
                    stroke_opacity="1", stroke_width=2)
 
 
-
-
 action_count = Action.objects.count()
-action_scale = Scale(domain=[Action.objects.order_by('in_degree')[0].in_degree,
-                             Action.objects.order_by('-in_degree')[0].in_degree],
-                     range=[5, 30])
-action_axis_len = sum([action_scale.linear(a.in_degree)*1.1 for a in Action.objects.all()])
+action_scale = Scale(
+    domain=[Action.objects.order_by('in_degree')[0].in_degree,
+            Action.objects.order_by('-in_degree')[0].in_degree],
+    range=[5, 30])
+
+action_axis_len = sum([action_scale.linear(a.in_degree)*1.1
+                       for a in Action.objects.all()])
 
 action_axis_origin = rotate(offcenter,
                             angle=rotation + 180 + 45,
@@ -95,9 +99,10 @@ h.axes = [axis_egos, axis_alters, axis_actions]
 j = 0.0
 for e in Alter.objects.filter(sector=ego).order_by('degree').all():
     delta = ego_scale.linear(e.degree) / ego_axis_len
-    j += delta * 2.0        
+    j += delta * 2.0
     n = Node(e)
     axis_egos.add_node(n, j)
+
     n.dwg = n.dwg.circle(center=(n.x, n.y),
                          r=ego_scale.linear(e.degree),
                          stroke_width=0,
@@ -105,20 +110,19 @@ for e in Alter.objects.filter(sector=ego).order_by('degree').all():
                          fill_opacity=0.8)
 
 
-sector_color = {'Academia': 'forestgreen',
-               'Gobierno': 'greenyellow',
-               None: 'blue',
-               'Otros': 'gold',
-               'Privado': 'orangered',
-               ' Sociedad_Civil': 'deeppink',
-               'Sociedad_Civil': 'deeppink'}
+sector_color = {'Academia': 'blue',
+                'Gobierno': 'green',
+                None: 'orange',
+                'Otros': 'purple',
+                'Privado': 'purple',
+                ' Sociedad_Civil': 'yellow',
+                'Sociedad_Civil': 'yellow'}
 
 # place alter nodes on alter axis
 j = 0.0
 for e in Alter.objects.exclude(sector=ego).order_by('degree').all():
     delta = alter_scale.linear(e.degree) / alter_axis_len
     j += delta
-    print e.degree, delta, j, alter_scale.linear(e.degree)  # / ego_axis_len  #, ego_offset.linear()
 
     n = Node(e)
     axis_alters.add_node(n, j)
@@ -138,27 +142,24 @@ j = 0.0
 for action in Action.objects.order_by('in_degree'):
     delta = 1.1 * action_scale.linear(action.in_degree) / action_axis_len
     j += delta
-    print action.in_degree, delta, j, action_scale.linear(action.in_degree)  # / ego_axis_len  #, ego_offset.linear()
-    
+
     n = Node(action)
     axis_actions.add_node(n, j)
     size = action_scale.linear(action.in_degree)
-    n.dwg = n.dwg.rect(insert = (n.x - size/2.0,
-                                 n.y - size/2.0),
-                       size   = (size, size),
-                       fill   = 'midnightblue',
-                       fill_opacity = 0.6,
-                       stroke_width = 0.5)
-
+    n.dwg = n.dwg.rect(insert=(n.x - size/2.0,
+                               n.y - size/2.0),
+                       size=(size, size),
+                       fill='midnightblue',
+                       fill_opacity=0.6,
+                       stroke_width=0.5)
 
 
 ego_color = {1: 'forestgreen',
              2: 'greenyellow',
              3: 'goldenrod',
              4: 'gold'}
-             
-             
-    
+
+
 # grab egos
 for e in Alter.objects.filter(sector=ego).all():
     # grab their ego net
@@ -172,7 +173,6 @@ for e in Alter.objects.filter(sector=ego).all():
                       stroke_width=1,
                       stroke_opacity=1,
                       stroke=ego_color[edge.distance],)
-                  
 
 
 # create links for agencies
@@ -189,6 +189,6 @@ for a in Agency.objects.all():
                   stroke_width=0.99,
                   stroke_opacity=0.7,
                   stroke=color)
-                  
-            
+
+
 h.save()
