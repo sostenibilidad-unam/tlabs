@@ -22,7 +22,7 @@ class Command(BaseCommand):
                 self.stdout.write("%s: found alter %s" % (options['csv'].name, alter))
 
             target_name = row['TARGET']
-            action, created = Action.objects.get_or_create(action=target_name.encode('utf-8'))
+            action, created = Action.objects.get_or_create(action=target_name.decode('utf-8'))
             if created:
                 self.stdout.write(u"%s: created action %s" % (options['csv'].name, action))
             else:

@@ -27,7 +27,7 @@ class Alter(models.Model):
     desc = models.TextField(blank=True)
 
     degree = models.IntegerField(default=0)
-    
+
     def mental_model(self):
         g = nx.Graph()
 
@@ -117,8 +117,6 @@ class MentalEdge(models.Model):
         return u"(%s)->(%s)" % (self.source, self.target)
 
 
-
-
 class Networks:
     def __init__(self):
 
@@ -134,7 +132,6 @@ class Networks:
         for node in degrees:
             node[0].degree = node[1]
             node[0].save()
-
 
     def update_action_metrics(self):
         for a in Action.objects.all():
