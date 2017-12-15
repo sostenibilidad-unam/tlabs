@@ -9,12 +9,11 @@ Transofrmation Labs
  1. Los círculos rojos son Egos, van ordenados por grado de conectividad.
  2. Sobre el eje gris, en orden de conectividad, Alters cuyos [colores](http://www.december.com/html/spec/colorsvg.html) representan su sector:
 
-   - Academia: forestgreen
-   - Gobierno: greenyellow
-   - Otros: gold
-   - Privado: orangered
-   - Sociedad_Civil: deeppink
-   - None: blue <-- **algunos alters no tienen sector**
+   - Academia: azul
+   - Gobierno: verde
+   - Otros: morado
+   - Privado: morado
+   - Sociedad_Civil: amarilo
 
 3. Cuadros azules son acciones, van ordenadas hacia afuera por in_degree.
 
