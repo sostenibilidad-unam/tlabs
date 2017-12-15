@@ -1,15 +1,11 @@
 command = "python ../fobject/manage.py"
 
 subcommands = [
-    'load_sectors',   #  egonet_type
-    'load_alter_edges',  #  egonet
-    'load_action_edges', # agency
-
-#    'load_mental_items',  #  mm types
-
+    'load_sectors',  # egonet_type
+    'load_alter_edges',  # egonet
+    'load_action_edges',  # agency
+    # 'load_mental_items',  #  mm types
 ]
-
-
 
 
 suffix = {
@@ -28,20 +24,18 @@ keys = [
     '012',
     '015',
     '016',
-    '017' ]
+    '017']
 
 keys = ["%03i" % n for n in range(1, 18)]
 
 keys.pop(10)
 keys.pop(11)
-
-
+keys.pop(2)
 
 for sc in subcommands:
     for k in keys:
-        print "ls v3/TL%s_%s" % (k, suffix[sc])
-        print "%s %s v3/TL%s_%s" % (command, sc, k, suffix[sc])
-
+        print "ls v5/TL%s_%s" % (k, suffix[sc])
+        print "%s %s v5/TL%s_%s" % (command, sc, k, suffix[sc])
 
 
 # for k in keys:
