@@ -34,14 +34,13 @@ offcenter = 80
 center = (500, 400)
 rotation = -180
 
-ego = Sector.objects.get(name='Ego')
 
-ego_count = Alter.objects.filter(sector=ego).count()
+ego_count = Alter.objects.filter(name__icontains='TL').count()
 ego_scale = Scale(domain=[Alter.objects.order_by('degree')[0].degree,
                           Alter.objects.order_by('-degree')[0].degree],
                   range=[5, 30])
-ego_axis_len = sum([ego_scale.linear(e.degree)*2.0
-                    for e in Alter.objects.filter(sector=ego).all()])
+ego_axis_len = sum([ego_scale.linear(e.degree) * 2.0
+                    for e in Alter.objects.filter(name__icontains='TL').all()])
 
 ego_axis_origin = rotate(offcenter,
                          angle=rotation,
@@ -54,14 +53,14 @@ axis_egos = Axis(ego_axis_origin,
                  stroke_opacity="1", stroke_width=2)
 
 
-alter_count = Alter.objects.exclude(sector=ego).count()
+alter_count = Alter.objects.exclude(name__icontains='TL').count()
 alter_scale = Scale(
-    domain=[Alter.objects.exclude(sector=ego).order_by('degree')[0].degree,
-            Alter.objects.exclude(sector=ego).order_by('-degree')[0].degree],
+    domain=[Alter.objects.exclude(name__icontains='TL').order_by('degree')[0].degree,
+            Alter.objects.exclude(name__icontains='TL').order_by('-degree')[0].degree],
     range=[5, 50])
 
 alter_axis_len = sum([alter_scale.linear(e.degree)
-                      for e in Alter.objects.exclude(sector=ego).all()])
+                      for e in Alter.objects.exclude(name__icontains='TL').all()])
 
 alter_axis_origin = rotate(offcenter,
                            angle=rotation + 135,
@@ -95,20 +94,6 @@ axis_actions = Axis(action_axis_origin,
 
 h.axes = [axis_egos, axis_alters, axis_actions]
 
-# place ego nodes on ego axis
-j = 0.0
-for e in Alter.objects.filter(sector=ego).order_by('degree').all():
-    delta = ego_scale.linear(e.degree) / ego_axis_len
-    j += delta * 2.0
-    n = Node(e)
-    axis_egos.add_node(n, j)
-
-    n.dwg = n.dwg.circle(center=(n.x, n.y),
-                         r=ego_scale.linear(e.degree),
-                         stroke_width=0,
-                         fill='darkred',
-                         fill_opacity=0.8)
-
 
 sector_color = {'Academia': 'blue',
                 'Gobierno': 'green',
@@ -118,9 +103,31 @@ sector_color = {'Academia': 'blue',
                 ' Sociedad_Civil': 'yellow',
                 'Sociedad_Civil': 'yellow'}
 
+
+# place ego nodes on ego axis
+j = 0.0
+for e in Alter.objects.filter(name__icontains='TL').order_by('degree').all():
+    delta = ego_scale.linear(e.degree) / ego_axis_len
+    j += delta * 2.0
+    n = Node(e)
+    axis_egos.add_node(n, j)
+
+    if e.sector:
+        sector = e.sector.name
+    else:
+        sector = None
+
+    n.dwg = n.dwg.circle(center=(n.x, n.y),
+                         r=ego_scale.linear(e.degree),
+                         stroke_width=0,
+                         fill=sector_color[sector],
+                         fill_opacity=0.8)
+
+
+
 # place alter nodes on alter axis
 j = 0.0
-for e in Alter.objects.exclude(sector=ego).order_by('degree').all():
+for e in Alter.objects.exclude(name__icontains='TL').order_by('degree').all():
     delta = alter_scale.linear(e.degree) / alter_axis_len
     j += delta
 
@@ -161,7 +168,7 @@ ego_color = {1: 'forestgreen',
 
 
 # grab egos
-for e in Alter.objects.filter(sector=ego).all():
+for e in Alter.objects.filter(name__icontains='TL').all():
     # grab their ego net
     for edge in e.ego_net.all():
         a = edge.target
