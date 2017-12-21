@@ -38,6 +38,8 @@ for sc in subcommands:
         print "%s %s v5/TL%s_%s" % (command, sc, k, suffix[sc])
 
 
+print "%s load_ego_types ego_types.csv" % command
+
 # for k in keys:
 #     print "%s load_mental_edges --ego TL%s --csv joined/TL%s_%s" % (command,
 #                                                                   k, k,
