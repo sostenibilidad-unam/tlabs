@@ -30,17 +30,27 @@ def rotate(radius, angle, origin=(0, 0)):
             origin[1] + round((radius * sin(radians(angle))), 2))
 
 
+sector_color = {'Academia': 'blue',
+                'Gobierno': 'green',
+                None: 'orange',
+                'Otros': 'purple',
+                'Privado': 'purple',
+                'Sociedad_Civil': 'yellow'}
+
+
 offcenter = 80
 center = (500, 400)
 rotation = -180
 
-
-ego_count = Alter.objects.filter(name__icontains='TL').count()
+############
+# Ego axis #
+############
+ego_count = Alter.objects.filter(name__contains='TL0').count()
 ego_scale = Scale(domain=[Alter.objects.order_by('degree')[0].degree,
                           Alter.objects.order_by('-degree')[0].degree],
                   range=[5, 30])
 ego_axis_len = sum([ego_scale.linear(e.degree) * 2.0
-                    for e in Alter.objects.filter(name__icontains='TL').all()])
+                    for e in Alter.objects.filter(name__contains='TL0').all()])
 
 ego_axis_origin = rotate(offcenter,
                          angle=rotation,
@@ -52,25 +62,80 @@ axis_egos = Axis(ego_axis_origin,
                  stroke="purple",
                  stroke_opacity="1", stroke_width=2)
 
+# place ego nodes on ego axis
+j = 0.0
+for e in Alter.objects.filter(name__contains='TL0').order_by('degree').all():
+    delta = ego_scale.linear(e.degree) / ego_axis_len
+    j += delta * 2.0
+    n = Node(e)
+    axis_egos.add_node(n, j)
 
-alter_count = Alter.objects.exclude(name__icontains='TL').count()
+    if e.sector:
+        sector = e.sector.name
+    else:
+        sector = None
+
+    n.dwg = n.dwg.circle(center=(n.x, n.y),
+                         r=ego_scale.linear(e.degree),
+                         stroke_width=0,
+                         fill=sector_color[sector],
+                         fill_opacity=0.8)
+
+
 alter_scale = Scale(
-    domain=[Alter.objects.exclude(name__icontains='TL').order_by('degree')[0].degree,
-            Alter.objects.exclude(name__icontains='TL').order_by('-degree')[0].degree],
-    range=[5, 50])
+    domain=[Alter.objects.exclude(name__contains='TL0').
+            order_by('degree')[0].degree,
+            Alter.objects.exclude(name__contains='TL0').
+            order_by('-degree')[0].degree],
+    range=[5, 20])
 
-alter_axis_len = sum([alter_scale.linear(e.degree)
-                      for e in Alter.objects.exclude(name__icontains='TL').all()])
 
-alter_axis_origin = rotate(offcenter,
-                           angle=rotation + 135,
-                           origin=center)
-axis_alters = Axis(alter_axis_origin,
-                   rotate(offcenter + alter_axis_len,
-                          angle=rotation + 135,
-                          origin=alter_axis_origin),
-                   stroke="grey",
-                   stroke_opacity="1", stroke_width=2)
+def alter_axis_len(sector_name):
+    return sum([alter_scale.linear(a.degree)
+                for a in Alter.objects.filter(
+                        sector__name=sector_name).exclude(
+                            name__contains='TL0')])
+
+
+##############
+# Alter axes #
+##############
+starts = []
+
+
+def alter_axis(name, start):
+
+    axis_len = alter_axis_len(name)
+    axis_end = rotate(axis_len,
+                      angle=rotation + 135,
+                      origin=start)
+    fake_end = rotate(axis_len + 20,
+                      angle=rotation + 135,
+                      origin=start)
+
+    starts.append(fake_end)
+    axis = Axis(start,
+                axis_end,
+                stroke=sector_color[name],
+                stroke_opacity="1", stroke_width=2)
+
+    # place alter nodes on alter axis
+    j = 0.0
+    for alter in Alter.objects.filter(
+            sector__name=name).exclude(
+                name__contains='TL0').order_by('degree').all():
+        delta = alter_scale.linear(alter.degree) / axis_len
+        j += delta
+        n = Node(alter)
+        axis.add_node(n, j)
+
+        n.dwg = n.dwg.circle(center=(n.x, n.y),
+                             r=alter_scale.linear(alter.degree) / 2.0,
+                             stroke_width=0,
+                             fill=sector_color[name],
+                             fill_opacity=0.87)
+
+    return axis
 
 
 action_count = Action.objects.count()
@@ -91,57 +156,6 @@ axis_actions = Axis(action_axis_origin,
                            origin=action_axis_origin),
                     stroke="blue",
                     stroke_opacity="1", stroke_width=2)
-
-h.axes = [axis_egos, axis_alters, axis_actions]
-
-
-sector_color = {'Academia': 'blue',
-                'Gobierno': 'green',
-                None: 'orange',
-                'Otros': 'purple',
-                'Privado': 'purple',
-                ' Sociedad_Civil': 'yellow',
-                'Sociedad_Civil': 'yellow'}
-
-
-# place ego nodes on ego axis
-j = 0.0
-for e in Alter.objects.filter(name__icontains='TL').order_by('degree').all():
-    delta = ego_scale.linear(e.degree) / ego_axis_len
-    j += delta * 2.0
-    n = Node(e)
-    axis_egos.add_node(n, j)
-
-    if e.sector:
-        sector = e.sector.name
-    else:
-        sector = None
-
-    n.dwg = n.dwg.circle(center=(n.x, n.y),
-                         r=ego_scale.linear(e.degree),
-                         stroke_width=0,
-                         fill=sector_color[sector],
-                         fill_opacity=0.8)
-
-
-
-# place alter nodes on alter axis
-j = 0.0
-for e in Alter.objects.exclude(name__icontains='TL').order_by('degree').all():
-    delta = alter_scale.linear(e.degree) / alter_axis_len
-    j += delta
-
-    n = Node(e)
-    axis_alters.add_node(n, j)
-    if e.sector:
-        sector = e.sector.name
-    else:
-        sector = None
-    n.dwg = n.dwg.circle(center=(n.x, n.y),
-                         r=alter_scale.linear(e.degree)/2.0,
-                         stroke_width=0,
-                         fill=sector_color[sector],
-                         fill_opacity=0.77)
 
 
 # place action nodes on action axis
@@ -167,35 +181,48 @@ ego_color = {1: 'forestgreen',
              4: 'gold'}
 
 
-# grab egos
-for e in Alter.objects.filter(name__icontains='TL').all():
+axis_origin = rotate(offcenter,
+                     angle=rotation + 135,
+                     origin=center)
+alter_axes = [alter_axis("Gobierno", axis_origin),
+              alter_axis("Academia", starts.pop()),
+              alter_axis("Otros", starts.pop()),
+              alter_axis("Privado", starts.pop()),
+              alter_axis("Sociedad_Civil", starts.pop())]
+
+h.axes = [axis_egos, ] + alter_axes + [axis_actions, ]
+
+
+# link egos
+for ego in Alter.objects.filter(name__contains='TL0').all():
     # grab their ego net
-    for edge in e.ego_net.all():
-        a = edge.target
-        if a in axis_alters.nodes:
-            h.connect(axis_egos, e,
-                      20,
-                      axis_alters, a,
-                      -45,
-                      stroke_width=1,
-                      stroke_opacity=1,
-                      stroke=ego_color[edge.distance],)
+    for edge in ego.ego_net.all():
+        alter = edge.target
+        for alter_axis in alter_axes:
+            if alter in alter_axis.nodes:
+                h.connect(axis_egos, ego,
+                          60,
+                          alter_axis, alter,
+                          -60,
+                          stroke_width=edge.distance * 3.5,
+                          stroke_opacity=0.33,
+                          stroke=sector_color[alter.sector.name],)
 
 
-# create links for agencies
-for a in Agency.objects.all():
-    if a.alter in axis_alters.nodes and a.action in axis_actions.nodes:
-        if a.action.in_degree < 2:
-            color = "pink"
-        else:
-            color = "royalblue"
-        h.connect(axis_alters, a.alter,
-                  10,
-                  axis_actions, a.action,
-                  -10,
-                  stroke_width=0.99,
-                  stroke_opacity=0.7,
-                  stroke=color)
+# # create links for agencies
+# for a in Agency.objects.all():
+#     if a.alter in axis_alters.nodes and a.action in axis_actions.nodes:
+#         if a.action.in_degree < 2:
+#             color = "pink"
+#         else:
+#             color = "royalblue"
+#         h.connect(axis_alters, a.alter,
+#                   10,
+#                   axis_actions, a.action,
+#                   -10,
+#                   stroke_width=0.99,
+#                   stroke_opacity=0.7,
+#                   stroke=color)
 
 
 h.save()
