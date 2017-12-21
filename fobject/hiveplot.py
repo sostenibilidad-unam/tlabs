@@ -109,7 +109,7 @@ def alter_axis(name, start):
     axis_end = rotate(axis_len,
                       angle=rotation + 135,
                       origin=start)
-    fake_end = rotate(axis_len + 20,
+    fake_end = rotate(axis_len + 60,
                       angle=rotation + 135,
                       origin=start)
 
@@ -209,20 +209,21 @@ for ego in Alter.objects.filter(name__contains='TL0').all():
                           stroke=sector_color[alter.sector.name],)
 
 
-# # create links for agencies
-# for a in Agency.objects.all():
-#     if a.alter in axis_alters.nodes and a.action in axis_actions.nodes:
-#         if a.action.in_degree < 2:
-#             color = "pink"
-#         else:
-#             color = "royalblue"
-#         h.connect(axis_alters, a.alter,
-#                   10,
-#                   axis_actions, a.action,
-#                   -10,
-#                   stroke_width=0.99,
-#                   stroke_opacity=0.7,
-#                   stroke=color)
+# create links for agencies
+for a in Agency.objects.all():
+    for alter_axis in alter_axes:
+        if a.alter in alter_axis.nodes and a.action in axis_actions.nodes:
+            if a.action.in_degree < 2:
+                color = "pink"
+            else:
+                color = "royalblue"
+            h.connect(alter_axis, a.alter,
+                      10,
+                      axis_actions, a.action,
+                      -10,
+                      stroke_width=0.99,
+                      stroke_opacity=0.7,
+                      stroke=color)
 
 
 h.save()
