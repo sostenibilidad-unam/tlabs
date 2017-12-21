@@ -26,10 +26,10 @@ keys = [
     '016',
     '017']
 
-keys = ["%03i" % n for n in range(1, 18)]
+keys = ["%03i" % n for n in range(1, 19)]
 
+keys.pop(12)
 keys.pop(10)
-keys.pop(11)
 keys.pop(2)
 
 for sc in subcommands:
