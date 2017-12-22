@@ -26,27 +26,27 @@ in_degree de la acción es 1, y dark cyan cuando es mayor.
 
 <tr>
 <td>
-<img src="Gobierno.png">
+<img src="fobject/Gobierno.png">
 </td>
 </tr>
 <tr>
 <td>
-<img src="Academia.png">
+<img src="fobject/Academia.png">
 </td>
 </tr>
 <tr>
 <td>
-<img src="Otros.png">
+<img src="fobject/Otros.png">
 </td>
 </tr>
 <tr>
 <td>
-<img src="Privado.png">
+<img src="fobject/Privado.png">
 </td>
 </tr>
 <tr>
 <td>
-<img src="Sociedad_Civil.png">
+<img src="fobject/Sociedad_Civil.png">
 </td>
 </tr>
 
