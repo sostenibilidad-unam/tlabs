@@ -52,7 +52,7 @@ ego_scale = Scale(domain=[Alter.objects.order_by('degree')[0].degree,
 ego_axis_len = sum([ego_scale.linear(e.degree) * 2.0
                     for e in Alter.objects.filter(name__contains='TL0').all()])
 
-ego_axis_origin = rotate(offcenter,
+ego_axis_origin = rotate(offcenter + 100,
                          angle=rotation,
                          origin=center)
 axis_egos = Axis(ego_axis_origin,
@@ -154,7 +154,7 @@ axis_actions = Axis(action_axis_origin,
                     rotate(offcenter + action_count * 10,
                            angle=rotation + 180 + 45,
                            origin=action_axis_origin),
-                    stroke="blue",
+                    stroke="firebrick",
                     stroke_opacity="1", stroke_width=2)
 
 
@@ -170,7 +170,7 @@ for action in Action.objects.order_by('in_degree'):
     n.dwg = n.dwg.rect(insert=(n.x - size/2.0,
                                n.y - size/2.0),
                        size=(size, size),
-                       fill='midnightblue',
+                       fill='maroon',
                        fill_opacity=0.6,
                        stroke_width=0.5)
 
@@ -201,7 +201,7 @@ for ego in Alter.objects.filter(name__contains='TL0').all():
         for alter_axis in alter_axes:
             if alter in alter_axis.nodes:
                 h.connect(axis_egos, ego,
-                          60,
+                          45,
                           alter_axis, alter,
                           -60,
                           stroke_width=edge.distance * 2.0,
@@ -214,15 +214,17 @@ for a in Agency.objects.all():
     for alter_axis in alter_axes:
         if a.alter in alter_axis.nodes and a.action in axis_actions.nodes:
             if a.action.in_degree < 2:
-                color = "pink"
+                color = "lightsteelblue"
+                opacity = 0.77
             else:
-                color = "royalblue"
+                color = "darkcyan"
+                opacity = 0.8
             h.connect(alter_axis, a.alter,
-                      10,
+                      1,
                       axis_actions, a.action,
-                      -10,
+                      -40,
                       stroke_width=1.5,
-                      stroke_opacity=0.65,
+                      stroke_opacity=opacity,
                       stroke=color)
 
 
