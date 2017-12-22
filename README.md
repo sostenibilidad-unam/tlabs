@@ -21,3 +21,33 @@ Los ejes 2 y 3 se unen por vínculos color azul claro cuando el
 in_degree de la acción es 1, y dark cyan cuando es mayor.
 
 <img src="fobject/agency.png" >
+
+<table>
+
+<tr>
+<td>
+<img src="Gobierno.png">
+</td>
+</tr>
+<tr>
+<td>
+<img src="Academia.png">
+</td>
+</tr>
+<tr>
+<td>
+<img src="Otros.png">
+</td>
+</tr>
+<tr>
+<td>
+<img src="Privado.png">
+</td>
+</tr>
+<tr>
+<td>
+<img src="Sociedad_Civil.png">
+</td>
+</tr>
+
+</table>
