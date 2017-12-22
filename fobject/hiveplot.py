@@ -204,7 +204,7 @@ for ego in Alter.objects.filter(name__contains='TL0').all():
                           60,
                           alter_axis, alter,
                           -60,
-                          stroke_width=edge.distance * 3.5,
+                          stroke_width=edge.distance * 2.0,
                           stroke_opacity=0.33,
                           stroke=sector_color[alter.sector.name],)
 
@@ -221,8 +221,8 @@ for a in Agency.objects.all():
                       10,
                       axis_actions, a.action,
                       -10,
-                      stroke_width=0.99,
-                      stroke_opacity=0.7,
+                      stroke_width=1.5,
+                      stroke_opacity=0.65,
                       stroke=color)
 
 
