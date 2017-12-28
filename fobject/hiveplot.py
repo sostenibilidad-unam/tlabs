@@ -1,6 +1,8 @@
 import os
 import sys
 import argparse
+import svgwrite
+
 
 parser = argparse.ArgumentParser(
     description="create tlabs hiveplot")
@@ -90,11 +92,16 @@ for e in Alter.objects.filter(name__contains='TL0').order_by('degree').all():
     else:
         sector = None
 
-    n.dwg = n.dwg.circle(center=(n.x, n.y),
-                         r=ego_scale.linear(e.degree),
-                         stroke_width=0,
-                         fill=sector_color[sector],
-                         fill_opacity=0.8)
+    n.dwg.add(n.dwg.circle(center=(n.x, n.y),
+                           r=ego_scale.linear(e.degree),
+                           stroke_width=0,
+                           fill=sector_color[sector],
+                           fill_opacity=0.8))
+    g = svgwrite.container.Group(transform='rotate(-90, %s, %s)' % (n.x, n.y))
+    g.add(n.dwg.text(e.name,
+                     insert=(n.x, n.y)))
+    n.dwg.add(g)
+
 
 
 alter_scale = Scale(
