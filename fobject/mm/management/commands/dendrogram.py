@@ -47,6 +47,5 @@ class Command(BaseCommand):
         # plt.show()
 
         df = pd.DataFrame(data=a, columns=sorted(alters.keys()))
-        print df, a
         sns.clustermap(df, standard_scale=1)
-        plt.show()
+        plt.savefig('dendrogram.png')
