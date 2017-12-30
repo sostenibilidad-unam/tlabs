@@ -16,18 +16,21 @@ class Command(BaseCommand):
     help = 'draw dendrogram'
 
     def handle(self, *args, **options):
-        alters = {}
+        actions = {}
 
         for ego in Alter.objects.filter(name__contains='TL0'):
-            alters[ego] = set([edge.target for edge in ego.ego_net.all()])
+            actions[ego] = set()
+            for edge in ego.ego_net.all():
+                for action in edge.target.action_set.all():
+                    actions[ego].add(action)
 
         a = []
-        for i in sorted(alters.keys()):
+        for i in sorted(actions.keys()):
             row = []
-            for j in sorted(alters.keys()):
-                row.append(jaccard_index(alters[i], alters[j]))
+            for j in sorted(actions.keys()):
+                row.append(jaccard_index(actions[i], actions[j]))
             a.append(row)
 
-        df = pd.DataFrame(data=a, columns=sorted(alters.keys()))
+        df = pd.DataFrame(data=a, columns=sorted(actions.keys()))
         sns.clustermap(df, standard_scale=1)
-        plt.savefig('dendrogram.png')
+        plt.savefig('dendrogram_actions.png')

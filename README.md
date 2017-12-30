@@ -64,6 +64,15 @@ Sociedad Civil
 </table>
 
 
-# Clusterizados por sus alters
+## Clusterizados por sus alters
 
 <img src="fobject/dendrogram.png">
+
+Hay un índice jaccard de semejanza entre los conjuntos de alters de dos egos.
+
+## Clusterizados por sus acciones
+
+<img src="fobject/dendrogram_actions.png">
+
+Hay un índice jaccard de semejanza entre los conjuntos de acciones, a
+través de los alters, de dos egos.
