@@ -97,7 +97,8 @@ for e in Alter.objects.filter(name__contains='TL0').order_by('degree').all():
                            stroke_width=0,
                            fill=sector_color[sector],
                            fill_opacity=0.8))
-    g = svgwrite.container.Group(transform='rotate(-90, %s, %s)' % (n.x, n.y))
+    g = svgwrite.container.Group(transform='rotate(-90, %s, %s)' % (n.x, n.y),
+                                 style='font-size:22')
     g.add(n.dwg.text(e.name,
                      insert=(n.x, n.y)))
     n.dwg.add(g)
