@@ -220,23 +220,24 @@ for ego in Alter.objects.filter(name__contains='TL0').all():
     # grab their ego net
     for edge in ego.ego_net.all():
         alter = edge.target
-        if args.sector != "all" and alter.sector.name == args.sector:
-            for alter_axis in alter_axes:
-                if alter in alter_axis.nodes:
-                    h.connect(axis_egos, ego,
-                              45,
-                              alter_axis, alter,
-                              -1,
-                              stroke_width=edge.distance * 2.0,
-                              stroke_opacity=0.33,
-                              stroke=sector_color[alter.sector.name],)
+        for alter_axis in alter_axes:
+            if alter in alter_axis.nodes \
+               and (args.sector == 'all'
+                    or alter.sector.name == args.sector):
+                h.connect(axis_egos, ego,
+                          45,
+                          alter_axis, alter,
+                          -1,
+                          stroke_width=edge.distance * 2.0,
+                          stroke_opacity=0.33,
+                          stroke=sector_color[alter.sector.name],)
 
 
 # create links for agencies
 for a in Agency.objects.all():
     for alter_axis in alter_axes:
         if a.alter in alter_axis.nodes and a.action in axis_actions.nodes\
-           and args.sector != "all" and a.alter.sector.name == args.sector:
+           and (args.sector == "all" or a.alter.sector.name == args.sector):
             if a.action.in_degree < 2:
                 color = "lightsteelblue"
                 opacity = 0.77
