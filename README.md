@@ -76,3 +76,6 @@ Hay un índice jaccard de semejanza entre los conjuntos de alters de dos egos.
 
 Hay un índice jaccard de semejanza entre los conjuntos de acciones, a
 través de los alters, de dos egos.
+
+## Alters clusterizados por distancias a Egos
+<img src="fobject/dendrogram_distances.png">
