@@ -29,6 +29,13 @@ class Command(BaseCommand):
             a.append(row)
 
         df = pd.DataFrame(data=a, columns=sorted(alters.keys()))
-        sns.clustermap(df, standard_scale=1,
-                       yticklabels=sorted(alters.keys()))
+
+        cmap = sns.cubehelix_palette(3, start=0.5, rot=-.75,
+                                     dark=0.1, light=0.9,
+                                     reverse=True, as_cmap=True)
+
+        cg = sns.clustermap(df, standard_scale=1, cmap=cmap,
+                            yticklabels=sorted(alters.keys()))
+
+        plt.setp(cg.ax_heatmap.xaxis.get_majorticklabels(), rotation=45)
         plt.savefig('dendrogram.png')
