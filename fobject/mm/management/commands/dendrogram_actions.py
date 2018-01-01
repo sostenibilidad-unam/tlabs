@@ -32,5 +32,8 @@ class Command(BaseCommand):
             a.append(row)
 
         df = pd.DataFrame(data=a, columns=sorted(actions.keys()))
-        sns.clustermap(df, standard_scale=1)
+        cg = sns.clustermap(df, standard_scale=1,
+                            yticklabels=sorted(actions.keys()))
+
+        plt.setp(cg.ax_heatmap.xaxis.get_majorticklabels(), rotation=45)
         plt.savefig('dendrogram_actions.png')

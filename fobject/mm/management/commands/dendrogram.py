@@ -29,5 +29,6 @@ class Command(BaseCommand):
             a.append(row)
 
         df = pd.DataFrame(data=a, columns=sorted(alters.keys()))
-        sns.clustermap(df, standard_scale=1)
+        sns.clustermap(df, standard_scale=1,
+                       yticklabels=sorted(alters.keys()))
         plt.savefig('dendrogram.png')
