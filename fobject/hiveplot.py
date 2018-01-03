@@ -190,12 +190,18 @@ for action in Action.objects.order_by('in_degree'):
     n = Node(action)
     axis_actions.add_node(n, j)
     size = action_scale.linear(action.in_degree)
-    n.dwg = n.dwg.rect(insert=(n.x - size/2.0,
-                               n.y - size/2.0),
-                       size=(size, size),
-                       fill='maroon',
-                       fill_opacity=0.6,
-                       stroke_width=0.5)
+    n.dwg.add(n.dwg.rect(insert=(n.x - size/2.0,
+                                 n.y - size/2.0),
+                         size=(size, size),
+                         fill='maroon',
+                         fill_opacity=0.6,
+                         stroke_width=0.5))
+    if action.in_degree > 1:
+        g = svgwrite.container.Group(style='font-size:11;')
+        g.add(n.dwg.text(action.action,
+                         insert=(n.x - 16, n.y),
+                         text_anchor='end'))
+        n.dwg.add(g)
 
 
 ego_color = {1: 'forestgreen',
