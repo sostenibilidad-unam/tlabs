@@ -27,8 +27,22 @@ admin.site.register(Type)
 admin.site.register(Sector)
 
 admin.site.register(Category)
-admin.site.register(Action)
-admin.site.register(Agency)
+
+
+class ActionAdmin(admin.ModelAdmin):
+    search_fields = ['action', ]
+    list_display = ['id', 'action', 'category', 'in_degree']
+
+
+admin.site.register(Action, ActionAdmin)
+
+
+class AgencyAdmin(admin.ModelAdmin):
+    search_fields = ['alter__name', 'action__action']
+    list_display = ['alter', 'action']
+
+
+admin.site.register(Agency, AgencyAdmin)
 
 admin.site.register(MentalType)
 admin.site.register(Item)
