@@ -10,23 +10,23 @@
 
 3rd axis: Practices (in red) ordered by Indegree.
 
-2nd and 3rd axis are linked with by actions (light cyan when the indegree is 1 and dark cyan when it is more than 1).
+2nd and 3rd axis are linked by practices (light cyan when the indegree is 1 and dark cyan when more).
 
 
 <table>
 <thead>
 <tr>
 <td>
-Gobierno
+Government
 </td>
 <td>
 Academia
 </td>
 <td>
-Privado
+Private sector
 </td>
 <td>
-Sociedad Civil
+Civil Society
 </td>
 </tr>
 </thead>
