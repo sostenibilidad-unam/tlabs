@@ -32,7 +32,7 @@ Gobierno
 Academia
 </td>
 <td>
-Otros.png
+Otros
 </td>
 <td>
 Privado
