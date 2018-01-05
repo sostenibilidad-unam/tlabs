@@ -1,26 +1,17 @@
 # Tlabs
 
-## Hiveplot
-
-### Colores de Egos y Alters
-
- - Academia: azul
- - Gobierno: verde
- - Otros: morado
- - Privado: morado
- - Sociedad_Civil: amarillo
-
-Cuadros rojos son acciones, van ordenadas hacia afuera por in_degree.
-
-### Vínculos
-
-Los ejes 1 y 2 se conectan por curvas del color de los nodos del eje
-2, el grosor representa la distancia.
-
-Los ejes 2 y 3 se unen por vínculos color azul claro cuando el
-in_degree de la acción es 1, y dark cyan cuando es mayor.
+## Hiveplots
 
 <img src="plots/agency.png" >
+
+1st axis: Egos (Colors by sector - Civil Society: yellow; Academia: blue; Government: green; Private sector: purple).
+
+2nd axis: Alters (same colors by sector).
+
+3rd axis: Practices (in red) ordered by Indegree.
+
+2nd and 3rd axis are linked with by actions (light cyan when the indegree is 1 and dark cyan when it is more than 1).
+
 
 <table>
 <thead>
@@ -30,9 +21,6 @@ Gobierno
 </td>
 <td>
 Academia
-</td>
-<td>
-Otros
 </td>
 <td>
 Privado
@@ -51,9 +39,6 @@ Sociedad Civil
 <img src="plots/Academia.png">
 </td>
 <td>
-<img src="plots/Otros.png">
-</td>
-<td>
 <img src="plots/Privado.png">
 </td>
 <td>
@@ -64,18 +49,20 @@ Sociedad Civil
 </table>
 
 
-## Clusterizados por sus alters
+## Clustered Egos by the Alters they share
 
 <img src="plots/dendrogram.png">
 
-Hay un índice jaccard de semejanza entre los conjuntos de alters de dos egos.
+Each cell in the heatmap contains the jaccard index of similarity
+between both Egos' set of Alters.
 
-## Clusterizados por sus acciones
+## Clustered Egos by the practices they share
 
 <img src="plots/dendrogram_actions.png">
 
-Hay un índice jaccard de semejanza entre los conjuntos de acciones, a
-través de los alters, de dos egos.
+Each cell contains the jaccard index of similarity between both Egos'
+set of Practices, which are indirectly joined to an Ego by her Alters.
 
-## Alters clusterizados por distancias a Egos
+## Clustered alters by their distances to Egos
+
 <img src="plots/dendrogram_distances.png">
