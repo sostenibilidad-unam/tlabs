@@ -20,7 +20,7 @@ Los ejes 1 y 2 se conectan por curvas del color de los nodos del eje
 Los ejes 2 y 3 se unen por vínculos color azul claro cuando el
 in_degree de la acción es 1, y dark cyan cuando es mayor.
 
-<img src="fobject/agency.png" >
+<img src="plots/agency.png" >
 
 <table>
 <thead>
@@ -45,19 +45,19 @@ Sociedad Civil
 <tbody>
 <tr>
 <td>
-<img src="fobject/Gobierno.png">
+<img src="plots/Gobierno.png">
 </td>
 <td>
-<img src="fobject/Academia.png">
+<img src="plots/Academia.png">
 </td>
 <td>
-<img src="fobject/Otros.png">
+<img src="plots/Otros.png">
 </td>
 <td>
-<img src="fobject/Privado.png">
+<img src="plots/Privado.png">
 </td>
 <td>
-<img src="fobject/Sociedad_Civil.png">
+<img src="plots/Sociedad_Civil.png">
 </td>
 </tr>
 </tbody>
@@ -66,16 +66,16 @@ Sociedad Civil
 
 ## Clusterizados por sus alters
 
-<img src="fobject/dendrogram.png">
+<img src="plots/dendrogram.png">
 
 Hay un índice jaccard de semejanza entre los conjuntos de alters de dos egos.
 
 ## Clusterizados por sus acciones
 
-<img src="fobject/dendrogram_actions.png">
+<img src="plots/dendrogram_actions.png">
 
 Hay un índice jaccard de semejanza entre los conjuntos de acciones, a
 través de los alters, de dos egos.
 
 ## Alters clusterizados por distancias a Egos
-<img src="fobject/dendrogram_distances.png">
+<img src="plots/dendrogram_distances.png">
