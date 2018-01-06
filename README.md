@@ -66,3 +66,7 @@ set of Practices, which are indirectly joined to an Ego by her Alters.
 ## Clustered alters by their distances to Egos
 
 <img src="plots/dendrogram_distances.png">
+
+## Alters, Practices clustered by mutual connections
+
+<img src="plots/dendrogram_alters_actions.png">
