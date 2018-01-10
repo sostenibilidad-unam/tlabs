@@ -3,7 +3,6 @@
 ## Hiveplots
 
 <img src="plots/agency_actioncats.png" >
-<img src="plots/agency_actioncats_joined.png" >
 
 1st axis: Egos (Colors by sector - Civil Society: yellow; Academia: blue; Government: green; Private sector: purple).
 
@@ -74,6 +73,11 @@ Civil Society
 </tbody>
 </table>
 
+### Practices clustered by category
+
+<img src="plots/agency_actioncats_joined.png" >
+
+Here is the [full list of practices](data/practices.csv).
 
 ## Clustered Egos by the Alters they share
 
