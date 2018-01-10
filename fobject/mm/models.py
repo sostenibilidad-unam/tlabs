@@ -54,6 +54,12 @@ class EgoEdge(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=100)
 
+    def alters(self):
+        return [a for a in self.action_set.all()]
+
+    def get_degree(self):
+        return sum([a.in_degree for a in self.alters()])
+
     class Meta:
         verbose_name_plural = "Categories"
 
