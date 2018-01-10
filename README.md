@@ -14,9 +14,8 @@
 
 Actions follow the following order and color scheme:
 
-
 Practice | Category
---------------------
+---------|----------
 Research | darkcyan
 Training | firebrick
 Agricultural/ecological training | orange
