@@ -59,16 +59,16 @@ Civil Society
 <tbody>
 <tr>
 <td>
-<img src="plots/Gobierno_actioncats.png">
+<img src="plots/Gobierno_actioncats.png" width="100%">
 </td>
 <td>
-<img src="plots/Academia_actioncats.png">
+<img src="plots/Academia_actioncats.png" width="100%">
 </td>
 <td>
-<img src="plots/Privado_actioncats.png">
+<img src="plots/Privado_actioncats.png" width="100%">
 </td>
 <td>
-<img src="plots/Sociedad_Civil_actioncats.png">
+<img src="plots/Sociedad_Civil_actioncats.png" width="100%">
 </td>
 </tr>
 </tbody>
