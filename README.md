@@ -3,6 +3,7 @@
 ## Hiveplots
 
 <img src="plots/agency_actioncats.png" >
+<img src="plots/agency_actioncats_joined.png" >
 
 1st axis: Egos (Colors by sector - Civil Society: yellow; Academia: blue; Government: green; Private sector: purple).
 
