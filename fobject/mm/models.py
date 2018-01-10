@@ -58,7 +58,7 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
     def __unicode__(self):
-        return u"!%s" % self.name
+        return u"%s" % self.name
 
 
 class Action(models.Model):
@@ -71,7 +71,7 @@ class Action(models.Model):
         self.in_degree = self.actor_set.count()
 
     def __unicode__(self):
-        return u"!%s" % self.action
+        return u"%s" % self.action
 
 
 class Agency(models.Model):
