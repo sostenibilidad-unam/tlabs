@@ -12,6 +12,32 @@
 
 2nd and 3rd axis are linked by practices (light cyan when the indegree is 1 and dark cyan when more).
 
+Actions follow the following order and color scheme:
+
+
+Practice | Category
+--------------------
+Research | darkcyan
+Training | firebrick
+Agricultural/ecological training | orange
+Outreach | green
+Market | blue
+Education | teal
+Funding | grey
+Collaboration | red
+Financial/commercial training | yellow
+Social organization | cornflowerblue
+Tourism | forestgreen
+Management | dodgerblue
+Networking | goldenrod
+Production | midnightblue
+Construction | darkgreen
+Culture | cyan
+Consultancy | hotpink
+Ecological conservation | lightcoral
+Citizen assistance | indigo
+Legal training | brown
+
 
 <table>
 <thead>
