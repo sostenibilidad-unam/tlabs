@@ -169,7 +169,7 @@ action_scale = Scale(
             Action.objects.order_by('-in_degree')[0].in_degree],
     range=[5, 30])
 
-action_axis_len = sum([action_scale.linear(a.in_degree)*1.1
+action_axis_len = sum([action_scale.linear(a.in_degree)*1.2
                        for a in Action.objects.all()])
 
 action_axis_origin = rotate(offcenter,
@@ -179,26 +179,32 @@ axis_actions = Axis(action_axis_origin,
                     rotate(offcenter + action_count * 10,
                            angle=rotation + 180 + 45,
                            origin=action_axis_origin),
-                    stroke="firebrick",
-                    stroke_opacity="1", stroke_width=2)
+                    stroke="black",
+                    stroke_opacity="0.33", stroke_width=1)
 
 
 action_cat_color = {
-    u'Capacitación': 'maroon',
-    u'Clasificación': 'firebrick',
-    u'Colaboración': 'orange',
-    u'Conservación ecológica': 'blue',
-    u'Construcción': 'teal',
-    u'Consultoría': 'grey',
-    u'Cultura': 'red',
-    u'Divulgación': 'yellow',
-    u'Educación': 'goldenrod',
-    u'Financiamiento': 'green',
-    u'Gestión': 'forestgreen',
-    u'Investigación': 'dodgerblue',
-    u'Mercado': 'cornflowerblue',
-    u'Producción': 'midnightblue',
-    u'Turismo': 'darkgreen'}
+    'Research': 'darkcyan',
+    'Training': 'firebrick',
+    'Agricultural/ecological training': 'orange',
+    'Outreach': 'green',
+    'Market': 'blue',
+    'Education': 'teal',
+    'Funding': 'grey',
+    'Collaboration': 'red',
+    'Financial/commercial training': 'yellow',
+    'Social organization': 'cornflowerblue',
+    'Tourism': 'forestgreen',
+    'Management': 'dodgerblue',
+    'Networking': 'goldenrod',
+    'Production': 'midnightblue',
+    'Construction': 'darkgreen',
+    'Culture': 'cyan',
+    'Consultancy': 'hotpink',
+    'Ecological conservation': 'lightcoral',
+    'Citizen assistance': 'indigo',
+    'Legal training': 'brown',
+}
 
 # place action nodes on action axis
 j = 0.0
@@ -216,7 +222,7 @@ for action in Action.objects.order_by('category', 'in_degree'):
                                  n.y - size/2.0),
                          size=(size, size),
                          fill=fill,
-                         fill_opacity=0.6,
+                         fill_opacity=0.8,
                          stroke_width=0.5))
     if action.in_degree > 1:
         g = svgwrite.container.Group(style='font-size:11;')
