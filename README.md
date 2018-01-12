@@ -73,9 +73,11 @@ Civil Society
 </tbody>
 </table>
 
-### Practices clustered by category
+### Practices grouped by category
 
 <img src="plots/agency_actioncats_joined.png" >
+
+Square nodes are categories in the **Urban** meta-category, circles are in the **Agro** meta-category.
 
 Here is the [full list of practices](data/practices.csv).
 

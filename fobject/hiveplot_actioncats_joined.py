@@ -210,6 +210,39 @@ action_cat_color = {
 
 # place action category nodes on action axis
 
+urban = [
+    'Funding',
+    'Management',
+    'Management',
+    'Outreach',
+    'Construction',
+    'Construction',
+    'Citizen assistance',
+    'Legal training',
+    'Management',
+    'Collaboration', ]
+
+agro = [
+    'Research',
+    'Agricultural/ecological training',
+    'Agricultural/ecological training',
+    'Financial/commercial training',
+    'Tourism',
+    'Ecological conservation',
+    'Agricultural/ecological training',
+    'Production',
+    'Education',
+    'Market',
+    'Financial/commercial training',
+    'Agricultural/ecological training',
+    'Education',
+    'Collaboration',
+    'Collaboration',
+    'Training',
+    'Education'
+    ]
+
+
 def by_degree(cat):
     return cat.get_degree()
 
@@ -226,12 +259,32 @@ for cat in sorted(Category.objects.all(), key=by_degree):
 
     size = actioncat_scale.linear(cat.get_degree())
     fill = action_cat_color[cat.name]
-    n.dwg.add(n.dwg.rect(insert=(n.x - size/2.0,
-                                 n.y - size/2.0),
-                         size=(size, size),
-                         fill=fill,
-                         fill_opacity=0.8,
-                         stroke_width=0.5))
+    if cat.name in agro:
+        n.dwg.add(n.dwg.rect(insert=(n.x - size/2.0,
+                                     n.y - size/2.0),
+                             size=(size, size),
+                             fill=fill,
+                             fill_opacity=0.8,
+                             stroke_width=0.5))
+    elif cat.name in urban:
+        n.dwg.add(n.dwg.circle(center=(n.x, n.y),
+                               r=size,
+                               stroke_width=0,
+                               fill=fill,
+                               fill_opacity=0.8))
+    else:
+        n.dwg.add(n.dwg.circle(center=(n.x, n.y),
+                               r=size * 0.8,
+                               stroke_width=0,
+                               fill=fill,
+                               fill_opacity=0.5))
+        n.dwg.add(n.dwg.rect(insert=(n.x - size/2.0,
+                                     n.y - size/2.0),
+                             size=(size, size),
+                             fill=fill,
+                             fill_opacity=0.5,
+                             stroke_width=0.5))
+
 
     g = svgwrite.container.Group(style='font-size:16;')
     g.add(n.dwg.text(cat.name,
