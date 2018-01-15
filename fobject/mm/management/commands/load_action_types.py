@@ -12,7 +12,7 @@ class Command(BaseCommand):
                             help='action categories CSV file')
 
     def handle(self, *args, **options):
-        reader = csv.reader(options['csv'], delimiter=":")
+        reader = csv.reader(options['csv'])
         for row in reader:
             cat_name = row[1]
             cat, created = Category.objects.get_or_create(name=cat_name)
