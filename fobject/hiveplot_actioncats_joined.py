@@ -102,7 +102,7 @@ for e in Alter.objects.filter(name__contains='TL0').order_by('degree').all():
     g = svgwrite.container.Group(transform='rotate(-90, %s, %s)' % (n.x, n.y),
                                  style='font-size:22')
     g.add(n.dwg.text(e.name,
-                     insert=(n.x - 90, n.y)))
+                     insert=(n.x - 100, n.y)))
     n.dwg.add(g)
 
 
@@ -219,10 +219,10 @@ urban = [
     'Construction',
     'Citizen assistance',
     'Legal training',
-    'Management',
-    'Collaboration', ]
+    'Management', ]
 
 agro = [
+    'Collaboration',
     'Research',
     'Agricultural/ecological training',
     'Agricultural/ecological training',
@@ -259,22 +259,22 @@ for cat in sorted(Category.objects.all(), key=by_degree):
 
     size = actioncat_scale.linear(cat.get_degree())
     fill = action_cat_color[cat.name]
-    if cat.name in agro:
+    if cat.name in urban:
         n.dwg.add(n.dwg.rect(insert=(n.x - size/2.0,
                                      n.y - size/2.0),
                              size=(size, size),
                              fill=fill,
                              fill_opacity=0.8,
                              stroke_width=0.5))
-    elif cat.name in urban:
+    elif cat.name in agro:
         n.dwg.add(n.dwg.circle(center=(n.x, n.y),
-                               r=size,
+                               r=size * 0.77,
                                stroke_width=0,
                                fill=fill,
                                fill_opacity=0.8))
     else:
         n.dwg.add(n.dwg.circle(center=(n.x, n.y),
-                               r=size * 0.8,
+                               r=size * 0.77,
                                stroke_width=0,
                                fill=fill,
                                fill_opacity=0.5))
@@ -282,13 +282,13 @@ for cat in sorted(Category.objects.all(), key=by_degree):
                                      n.y - size/2.0),
                              size=(size, size),
                              fill=fill,
-                             fill_opacity=0.5,
+                             fill_opacity=0.7,
                              stroke_width=0.5))
 
 
-    g = svgwrite.container.Group(style='font-size:16;')
+    g = svgwrite.container.Group(style='font-size:23;')
     g.add(n.dwg.text(cat.name,
-                     insert=(n.x - size * 0.8, n.y + 5),
+                     insert=(n.x - size * 0.83, n.y + 7),
                      text_anchor='end'))
     n.dwg.add(g)
 
