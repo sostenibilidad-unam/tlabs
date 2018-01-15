@@ -67,7 +67,7 @@ rotation = -180
 ego_count = Alter.objects.filter(name__contains='TL0').count()
 ego_scale = Scale(domain=[Alter.objects.order_by('degree')[0].degree,
                           Alter.objects.order_by('-degree')[0].degree],
-                  range=[5, 30])
+                  range=[2, 40])
 ego_axis_len = sum([ego_scale.linear(e.degree) * 2.0
                     for e in Alter.objects.filter(name__contains='TL0').all()])
 
@@ -100,9 +100,9 @@ for e in Alter.objects.filter(name__contains='TL0').order_by('degree').all():
                            fill=sector_color[sector],
                            fill_opacity=0.8))
     g = svgwrite.container.Group(transform='rotate(-90, %s, %s)' % (n.x, n.y),
-                                 style='font-size:22')
+                                 style='font-size:28')
     g.add(n.dwg.text(e.name,
-                     insert=(n.x - 90, n.y)))
+                     insert=(n.x - 111, n.y)))
     n.dwg.add(g)
 
 
@@ -167,20 +167,19 @@ action_count = Action.objects.count()
 action_scale = Scale(
     domain=[Action.objects.order_by('in_degree')[0].in_degree,
             Action.objects.order_by('-in_degree')[0].in_degree],
-    range=[5, 30])
+    range=[5, 40])
 
-action_axis_len = sum([action_scale.linear(a.in_degree)*1.2
+action_axis_len = sum([action_scale.linear(a.in_degree)
                        for a in Action.objects.all()])
 
 action_axis_origin = rotate(offcenter,
-                            angle=rotation + 180 + 45,
+                            angle=rotation + 180 + 60,
                             origin=center)
 axis_actions = Axis(action_axis_origin,
-                    rotate(offcenter + action_count * 10,
-                           angle=rotation + 180 + 45,
+                    rotate(offcenter + action_axis_len,
+                           angle=rotation + 180 + 60,
                            origin=action_axis_origin),
-                    stroke="black",
-                    stroke_opacity="0.33", stroke_width=1)
+                    stroke_width=0)
 
 
 action_cat_color = {
@@ -224,10 +223,10 @@ for action in Action.objects.order_by('category', 'in_degree'):
                          fill=fill,
                          fill_opacity=0.8,
                          stroke_width=0.5))
-    if action.in_degree > 1:
-        g = svgwrite.container.Group(style='font-size:11;')
-        g.add(n.dwg.text(action.action,
-                         insert=(n.x - 16, n.y),
+    if action.in_degree > 3:
+        g = svgwrite.container.Group(style='font-size:35;')
+        g.add(n.dwg.text("%s: %s" % (action.category.name, action.action),
+                         insert=(n.x - 20, n.y + 5),
                          text_anchor='end'))
         n.dwg.add(g)
 
