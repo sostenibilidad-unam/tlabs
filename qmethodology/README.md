@@ -3,10 +3,10 @@
 Arguments: 28 statements, 14 Q-sorts, “FALSE” forced distribution, 4 factors, 
 varimax rotation, automatic flagging and Pearson correlation coefficient. 
 
+## Relation between Q-sorts and factors
+
 LOA-Factor loadings for Q-sorts. Indicates the relationship between each Q-sort 
 and component or factor (using “varimax” rotation function).
-
-## Relation between Q-sorts and factors
 
 |Q-sort 	|f1	|f2	|f3	|F4    |
 |---------------|-------|-------|-------|------|
@@ -32,7 +32,6 @@ NOTE: Bold numbers (>0.5) are the Q-sorts (rows) related with that factor (colum
  The statements with the largest consensus are at the bottom where the distances among the factors are shorter
  (3, 27, 24, 21, 11, 14, 1 and 26). The statements with the largest differences between factors
  are at the top where all points are distant. 
- 
  <img src="Rplot_4factors.png">
 
 ## Q-statements
