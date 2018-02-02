@@ -1,8 +1,8 @@
-Arguments: 28 statements, 14 Q-sorts, ìFALSEî forced distribution, 4 factors, 
+Arguments: 28 statements, 14 Q-sorts, ‚ÄúFALSE‚Äù forced distribution, 4 factors, 
 varimax rotation, automatic flagging and Pearson correlation coefficient. 
 
 LOA-Factor loadings for Q-sorts. Indicates the relationship between each Q-sort 
-and component or factor (using ìvarimaxî rotation function).
+and component or factor (using ‚Äúvarimax‚Äù rotation function).
 
 Relation between Q-sorts and factors
 Q-sort 	f1	f2	f3	F4
@@ -41,9 +41,9 @@ Patrimony, identity, value
 	3. The chinampas are the patrimony of Xochimilco families.
 	4. The chinampa represents the patrimony of all Mexicans.
 	6. The chinampa is an important element of the Xochimilco identity.
-	10. To me, Xochimilco festivities should be preserved, as they are part of Mexicoís history.
+	10. To me, Xochimilco festivities should be preserved, as they are part of Mexico‚Äôs history.
 	20. People who live in Xochimilco value the importance of the lacustrine area as an ecological and cultural patrimony.
-	11. Xochimilco tales are still told (e.g. ìLa Lloronaî tale).
+	11. Xochimilco tales are still told (e.g. ‚ÄúLa Llorona‚Äù tale).
 	12. Xochimilco as a priority site for biodiversity conservation is overrated.
 	21. The festivities are important for the chinampas activities.
 	22. The chinampa producers are still devoted to their Patron Saints. 
