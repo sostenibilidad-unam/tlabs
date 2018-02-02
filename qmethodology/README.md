@@ -33,6 +33,7 @@ Plot. The following plot shows the statements ordered by the standard deviation
  (3, 27, 24, 21, 11, 14, 1 and 26). The statements with the largest differences between factors
  are at the top where all points are distant. 
  
+ ![Z-scores factors][Rplot_4factors.png]
 
 ## Q-statements
 
