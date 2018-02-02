@@ -36,26 +36,26 @@ Plot. The following plot shows the statements ordered by the standard deviation
 
 ## Q-statements
 
-Land use and property rights	
-	1. All Mexican homes should have the right to use their land for the benefit of their sons.
-	2. The land use of chinampas should be exclusively for agriculture.
-	9. Main cause for urbanization of chinampas is the lack of public policies implementation.
-	17. It is possible to convert the land use of chinampas to urban without degrading Xochimilco lake.
-Patrimony, identity, value	
-	3. The chinampas are the patrimony of Xochimilco families.
-	4. The chinampa represents the patrimony of all Mexicans.
-	6. The chinampa is an important element of the Xochimilco identity.
-	10. To me, Xochimilco festivities should be preserved, as they are part of Mexico’s history.
-	20. People who live in Xochimilco value the importance of the lacustrine area as an ecological and cultural patrimony.
-	11. Xochimilco tales are still told (e.g. “La Llorona” tale).
-	12. Xochimilco as a priority site for biodiversity conservation is overrated.
-	21. The festivities are important for the chinampas activities.
-	22. The chinampa producers are still devoted to their Patron Saints. 
-	23. It is important to bless the chinampas and their agricultural products. 
-	26. People in general has no idea of the benefits of Xochimilco and how to preserve it. 
-	25. People who are not native to Xochimilco are problematic because they do not know anything about it or do not care.  
-Ecological conditions and stressors	
-	7. Urbanization is destroying Xochimilco. 
+ - Land use and property rights
+   1. All Mexican homes should have the right to use their land for the benefit of their sons.
+   2. The land use of chinampas should be exclusively for agriculture.
+   9. Main cause for urbanization of chinampas is the lack of public policies implementation.
+   17. It is possible to convert the land use of chinampas to urban without degrading Xochimilco lake. 
+ - Patrimony, identity, value	
+   3. The chinampas are the patrimony of Xochimilco families.
+   4. The chinampa represents the patrimony of all Mexicans.
+   6. The chinampa is an important element of the Xochimilco identity.
+   10. To me, Xochimilco festivities should be preserved, as they are part of Mexico’s history.
+   20. People who live in Xochimilco value the importance of the lacustrine area as an ecological and cultural patrimony.
+   11. Xochimilco tales are still told (e.g. “La Llorona” tale).
+   12. Xochimilco as a priority site for biodiversity conservation is overrated.
+   21. The festivities are important for the chinampas activities.
+   22. The chinampa producers are still devoted to their Patron Saints. 
+   23. It is important to bless the chinampas and their agricultural products. 
+   26. People in general has no idea of the benefits of Xochimilco and how to preserve it. 
+   25. People who are not native to Xochimilco are problematic because they do not know anything about it or do not care.  
+ - Ecological conditions and stressors	
+   7. Urbanization is destroying Xochimilco. 
 	14. The trajineras boats and tourism is the main cause of degradation of the Xochimilco lake. 
 	18. The agricultural use of the chinampas is affecting the ecology of the Xochimilco lake.
 	19. The lake area of Xochimilco is in a good ecological condition.
