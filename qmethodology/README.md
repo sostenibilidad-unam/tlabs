@@ -1,25 +1,29 @@
+# Q-Methodology
+
 Arguments: 28 statements, 14 Q-sorts, “FALSE” forced distribution, 4 factors, 
 varimax rotation, automatic flagging and Pearson correlation coefficient. 
 
 LOA-Factor loadings for Q-sorts. Indicates the relationship between each Q-sort 
 and component or factor (using “varimax” rotation function).
 
-Relation between Q-sorts and factors
-Q-sort 	f1	f2	f3	F4
-001	0.770	0.230	0.411	0.210
-002	0.543	0.397	0.166	-0.093
-004	0.130	0.187	0.802	0.124
-005	0.189	0.233	0.079	0.902
-006	0.240	0.688	0.140	0.216
-007	0.776	0.346	0.162	-0.025
-008	0.184	0.859	0.251	0.067
-009	0.695	0.122	-0.294	0.368
-010	0.684	0.301	0.314	0.313
-015	0.394	0.747	0.145	0.359
-016	0.727	0.126	0.327	0.347
-017	0.144	0.210	0.858	-0.056
-018	0.751	0.126	-0.065	0.452
-019	0.706	0.478	0.184	-0.100
+## Relation between Q-sorts and factors
+
+|Q-sort 	|f1	|f2	|f3	|F4    |
+|---------------|-------|-------|-------|------|
+|001	|0.770	|0.230	|0.411	|0.210|
+|002	|0.543	|0.397	|0.166	|-0.093|
+|004	|0.130	|0.187	|0.802	|0.124|
+|005	|0.189	|0.233	|0.079	|0.902|
+|006	|0.240	|0.688	|0.140	|0.216|
+|007	|0.776	|0.346	|0.162	|-0.025|
+|008	|0.184	|0.859	|0.251	|0.067|
+|009	|0.695	|0.122	|-0.294	|0.368|
+|010	|0.684	|0.301	|0.314	|0.313|
+|015	|0.394	|0.747	|0.145	|0.359|
+|016	|0.727	|0.126	|0.327	|0.347|
+|017	|0.144	|0.210	|0.858	|-0.056|
+|018	|0.751	|0.126	|-0.065	|0.452|
+|019	|0.706	|0.478	|0.184	|-0.100|
 
 NOTE: Bold numbers (>0.5) are the Q-sorts (rows) related with that factor (columns).
 
@@ -30,7 +34,7 @@ Plot. The following plot shows the statements ordered by the standard deviation
  are at the top where all points are distant. 
  
 
-Q-statements
+## Q-statements
 
 Land use and property rights	
 	1. All Mexican homes should have the right to use their land for the benefit of their sons.
