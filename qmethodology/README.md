@@ -1,4 +1,4 @@
-# Q-Methodology
+# TLabs - Q-Methodology
 
 Arguments: 28 statements, 14 Q-sorts, “FALSE” forced distribution, 4 factors, 
 varimax rotation, automatic flagging and Pearson correlation coefficient. 
@@ -100,3 +100,5 @@ NOTE: Bold numbers (>0.5) are the Q-sorts (rows) related with that factor (colum
    16.- Lots of young people aspire to continue the traditional agricultural practices in the chinampas. 
    
    24.- The sons of chinampa producers are looking for different jobs.
+
+Developed by Patricia Pérez-Belmont
