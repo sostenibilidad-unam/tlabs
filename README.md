@@ -15,12 +15,10 @@ Our T-Lab brought in 19 agents involved in the use and management of the Xochimi
 
 <img src="Logo_Tlab.png" >
 
+* [STEPS Centre Global Consortium - North America Hub](https://steps-centre.org/global/north-america/)
 
-STEPS GLOBAL CONSORTIUM - NORTH AMERICA HUB https://steps-centre.org/global/north-america/
+Blogs
+- [How rethinking local people's agency could help navigate Xochimilco's troubled waters](https://steps-centre.org/blog/new-forms-agency-help-navigate-xochimilcos-troubled-waters/)
+- [A day in the chinampas](https://steps-centre.org/blog/a-day-in-the-chinampas/)
 
-BLOGS
-
-- https://steps-centre.org/blog/new-forms-agency-help-navigate-xochimilcos-troubled-waters/
-- https://steps-centre.org/blog/a-day-in-the-chinampas/
-
-AGENCY NETWORK ANALYSIS https://steps-centre.org/pathways-methods-vignettes/agency-network-analysis/
+[AGENCY NETWORK ANALYSIS](https://steps-centre.org/pathways-methods-vignettes/agency-network-analysis/)
