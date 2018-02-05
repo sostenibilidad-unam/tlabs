@@ -1,4 +1,4 @@
-# Tlabs - Hiveplots
+# TLabs - Hiveplots & Dendrograms
 
 <img src="../plots/agency_actioncats.png" >
 
@@ -62,4 +62,4 @@ set of Practices, which are indirectly joined to an Ego by her Alters.
 
 <img src="../plots/dendrogram_alters_actions.png">
 
-Developed by Rodrigo García
+(Developed by Rodrigo García)
