@@ -101,4 +101,4 @@ NOTE: Bold numbers (>0.5) are the Q-sorts (rows) related with that factor (colum
    
    24.- The sons of chinampa producers are looking for different jobs.
 
-Developed by Patricia Pérez-Belmont
+(Developed by Patricia Pérez-Belmont)
