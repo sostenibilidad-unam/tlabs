@@ -1,6 +1,4 @@
-# Tlabs
-
-## Hiveplots
+# Tlabs - Hiveplots
 
 <img src="../plots/agency_actioncats.png" >
 
@@ -63,3 +61,5 @@ set of Practices, which are indirectly joined to an Ego by her Alters.
 ## Alters, Practices clustered by mutual connections
 
 <img src="../plots/dendrogram_alters_actions.png">
+
+Developed by Rodrigo García
