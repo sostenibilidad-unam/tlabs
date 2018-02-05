@@ -7,7 +7,8 @@ Experiments to create spaces for social-ecological transformation are multiplyin
 
 [Q-Methodology](qmethodology)
 
-<img src="Logo_Tlab.png”>
+<img src="Logo_Tlab.png" >
+
 
 STEPS GLOBAL CONSORTIUM - NORTH AMERICA HUB https://steps-centre.org/global/north-america/
 
