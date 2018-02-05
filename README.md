@@ -20,8 +20,7 @@ STEPS GLOBAL CONSORTIUM - NORTH AMERICA HUB https://steps-centre.org/global/nort
 
 BLOGS
 
-https://steps-centre.org/blog/new-forms-agency-help-navigate-xochimilcos-troubled-waters/
-
-https://steps-centre.org/blog/a-day-in-the-chinampas/
+- https://steps-centre.org/blog/new-forms-agency-help-navigate-xochimilcos-troubled-waters/
+- https://steps-centre.org/blog/a-day-in-the-chinampas/
 
 AGENCY NETWORK ANALYSIS https://steps-centre.org/pathways-methods-vignettes/agency-network-analysis/
