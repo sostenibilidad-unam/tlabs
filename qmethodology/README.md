@@ -31,7 +31,7 @@ NOTE: Bold numbers (>0.5) are the Q-sorts (rows) related with that factor (colum
 
  Statements with largest consensus (bottom): 3, 27, 24, 21, 11, 14, 1 and 26. 
  
- Z-score values that are distinguishing for a given statement and factor are represented with a filled symbol.
+ Z-score values that distinguish a given statement and factor are represented with a filled symbol.
  
  <img src="Rplot_4factors.png">
 
