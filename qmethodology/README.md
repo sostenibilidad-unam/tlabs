@@ -29,9 +29,8 @@ NOTE: Bold numbers (>0.5) are the Q-sorts (rows) related with that factor (colum
 
 ## Plot. Statements comparing Z-scores by the 4 factors. 
 
- The statements with the largest consensus are at the bottom where the distances among the factors are shorter
- (3, 27, 24, 21, 11, 14, 1 and 26). The statements with the largest differences between factors
- are at the top where all points are distant.
+ Statements with largest consensus (bottom): 3, 27, 24, 21, 11, 14, 1 and 26. 
+ Z-score values that are distinguishing for a given statement and factor are represented with a filled symbol.
  
  <img src="Rplot_4factors.png">
 
