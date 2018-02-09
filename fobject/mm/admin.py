@@ -9,7 +9,7 @@ from .models import Alter, EgoEdge, Action, Fase, \
 
 class AlterAdmin(admin.ModelAdmin):
     search_fields = ['name']
-    list_display = ['name', 'sector', 'image_tag']
+    list_display = ['name', 'sector', 'avatar_name', 'image_tag']
 
 
 admin.site.register(Alter, AlterAdmin)
@@ -47,7 +47,7 @@ admin.site.register(ActionEdge, ActionEdgeAdmin)
 
 class MentalEdgeAdmin(admin.ModelAdmin):
     search_fields = ['ego__name']
-    list_display = ['source', 'target', 'fase']
+    list_display = ['ego', 'source', 'target', 'fase']
 
 
 admin.site.register(MentalEdge, MentalEdgeAdmin)
