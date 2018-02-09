@@ -3,30 +3,30 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-from .models import Alter, Type, EgoEdge, Action, \
-    Sector, Agency, MentalType, Item, MentalEdge, Category
+from .models import Alter, EgoEdge, Action, Fase, \
+    Sector, ActionEdge, Variable, MentalEdge, Category
 
 
 class AlterAdmin(admin.ModelAdmin):
     search_fields = ['name']
-    list_display = ['name', 'sector']
+    list_display = ['name', 'sector', 'image_tag']
 
 
 admin.site.register(Alter, AlterAdmin)
 
 
 class EgoEdgeAdmin(admin.ModelAdmin):
-    search_fields = ['source__name', 'target__name']
-    list_display = ['id', 'source', 'target', 'distance']
+    search_fields = ['source__name', 'target__name', 'fase']
+    list_display = ['id', 'source', 'target', 'distance', 'fase']
 
 
 admin.site.register(EgoEdge, EgoEdgeAdmin)
 
 
-admin.site.register(Type)
 admin.site.register(Sector)
-
+admin.site.register(Fase)
 admin.site.register(Category)
+admin.site.register(Variable)
 
 
 class ActionAdmin(admin.ModelAdmin):
@@ -37,13 +37,17 @@ class ActionAdmin(admin.ModelAdmin):
 admin.site.register(Action, ActionAdmin)
 
 
-class AgencyAdmin(admin.ModelAdmin):
+class ActionEdgeAdmin(admin.ModelAdmin):
     search_fields = ['alter__name', 'action__action']
-    list_display = ['alter', 'action']
+    list_display = ['alter', 'action', 'fase']
 
 
-admin.site.register(Agency, AgencyAdmin)
+admin.site.register(ActionEdge, ActionEdgeAdmin)
 
-admin.site.register(MentalType)
-admin.site.register(Item)
-admin.site.register(MentalEdge)
+
+class MentalEdgeAdmin(admin.ModelAdmin):
+    search_fields = ['ego__name']
+    list_display = ['source', 'target', 'fase']
+
+
+admin.site.register(MentalEdge, MentalEdgeAdmin)

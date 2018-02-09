@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from mm.models import Alter, Agency, Action
+from mm.models import Alter, ActionEdge, Action
 import csv
 import argparse
 
@@ -28,7 +28,7 @@ class Command(BaseCommand):
             else:
                 self.stdout.write(u"%s: found action %s" % (options['csv'].name, action))
 
-            e, created = Agency.objects.get_or_create(alter=alter,
+            e, created = ActionEdge.objects.get_or_create(alter=alter,
                                                       action=action)
             if created:
                 self.stdout.write(u"%s: created agency %s" % (options['csv'].name, e))

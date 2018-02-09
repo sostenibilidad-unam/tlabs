@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 import matplotlib.pyplot as plt
-from mm.models import Alter, Agency, Action
+from mm.models import Alter, ActionEdge, Action
 
 import seaborn as sns
 import pandas as pd
@@ -15,7 +15,7 @@ class Command(BaseCommand):
                 name__startswith='TL0').order_by('id'):
             r = []
             for action in Action.objects.order_by('id'):
-                agency = Agency.objects.filter(alter=alter,
+                agency = ActionEdge.objects.filter(alter=alter,
                                                action=action).count()
                 r.append(agency)
             t.append(r)
