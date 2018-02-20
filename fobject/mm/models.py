@@ -79,7 +79,7 @@ class PowerEdge(models.Model):
     fase = models.ForeignKey(Fase, null=True)
 
     def __unicode__(self):
-        return u"%s<-%s->%s" % (self.source, self.distance, self.target)
+        return u"%s -- %s" % (self.source, self.target)
 
 
 class Category(models.Model):
