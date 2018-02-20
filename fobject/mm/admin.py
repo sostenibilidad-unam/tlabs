@@ -8,9 +8,38 @@ from .models import Alter, EgoEdge, Action, Fase, \
     Power, PowerEdge
 
 
+class EgoEdgeInline(admin.TabularInline):
+    model = EgoEdge
+    fk_name = 'source'
+    extra = 1
+
+
+class ActionEdgeInline(admin.TabularInline):
+    model = ActionEdge
+    fk_name = 'alter'
+    extra = 0
+
+
+class PowerEdgeInline(admin.TabularInline):
+    model = PowerEdge
+    fk_name = 'source'
+    extra = 1
+
+
+class MentalEdgeInline(admin.TabularInline):
+    model = MentalEdge
+    fk_name = 'ego'
+    extra = 1
+
+
 class AlterAdmin(admin.ModelAdmin):
     search_fields = ['name']
     list_display = ['name', 'sector', 'avatar_name', 'image_tag']
+
+    inlines = [EgoEdgeInline,
+               ActionEdgeInline,
+               PowerEdgeInline,
+               MentalEdgeInline]
 
 
 admin.site.register(Alter, AlterAdmin)
