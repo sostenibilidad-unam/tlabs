@@ -56,21 +56,29 @@
 	</a>
 	<a href="#" class="item">Home</a>
 	<div class="ui simple dropdown item">
-	  Dropdown <i class="dropdown icon"></i>
+	  Egos <i class="dropdown icon"></i>
 	  <div class="menu">
-	    <a class="item" href="#">Link Item</a>
-	    <a class="item" href="#">Link Item</a>
-	    <div class="divider"></div>
-	    <div class="header">Header Item</div>
-	    <div class="item">
-	      <i class="dropdown icon"></i>
-	      Sub Menu
-	      <div class="menu">
-		<a class="item" href="#">Link Item</a>
-		<a class="item" href="#">Link Item</a>
-	      </div>
-	    </div>
-	    <a class="item" href="#">Link Item</a>
+
+
+
+	    {% for a in egos %}
+	    <a class="item" href="/ego/{{ a.id }}">{{ a.name }}</a>
+	    {% endfor %}
+
+
+	    <!-- <a class="item" href="#">Link Item</a> -->
+	    <!-- <a class="item" href="#">Link Item</a> -->
+	    <!-- <div class="divider"></div> -->
+	    <!-- <div class="header">Header Item</div> -->
+	    <!-- <div class="item"> -->
+	    <!--   <i class="dropdown icon"></i> -->
+	    <!--   Sub Menu -->
+	    <!--   <div class="menu"> -->
+	    <!--	<a class="item" href="#">Link Item</a> -->
+	    <!--	<a class="item" href="#">Link Item</a> -->
+	    <!--   </div> -->
+	    <!-- </div> -->
+	    <!-- <a class="item" href="#">Link Item</a> -->
 	  </div>
 	</div>
       </div>
