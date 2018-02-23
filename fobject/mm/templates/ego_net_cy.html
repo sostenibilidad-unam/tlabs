@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+
+
+{% block "extrahead" %}
+<style>
+  #cy {
+  width: 80%;
+  height: 80%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  }
+</style>
+{% endblock %}
+
+{% block "main" %}
+
+<h1 class="ui header">{{ title }}</h1>
+<p>This is a basic fixed menu template using fixed size containers.</p>
+<p>A text container is used for the main container, which is useful for single column layouts</p>
+
+
+<div id="cy" class="ui segment"></div>
+<script>
+  $.getJSON("/static/cyto.json", function (data) {
+     console.log(data);
+  var cy = cytoscape({
+  container: document.getElementById('cy'),
+  elements: data,
+  style: [
+  {
+  selector: 'node',
+  style: {
+  'label': 'data(label)',
+  'width': '60px',
+  'height': '60px',
+  'color': 'blue',
+  'background-fit': 'contain',
+  'background-clip': 'none'
+  }
+  }, {
+  selector: 'edge',
+  style: {
+  'text-background-color': 'yellow',
+  'text-background-opacity': 0.4,
+  'width': '6px',
+  'target-arrow-shape': 'triangle',
+  'control-point-step-size': '140px'
+  }
+  }
+  ],
+  layout: {
+  name: 'circle'
+  }
+  });
+  });
+</script>
+
+{% endblock %}

@@ -41,7 +41,7 @@ def ego_nets(request, ego_id):
     ego = Alter.objects.get(id=ego_id)
     context = {'ego': ego,
                'alters': Alter.objects.all()}
-    return render(request, 'ego_net.html', context)
+    return render(request, 'ego_net_cy.html', context)
 
 
 def mm(request, ego_id):
