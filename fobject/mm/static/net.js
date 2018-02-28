@@ -13,10 +13,13 @@ $.getJSON(`/ego_json/${ego_id}`, function (data) {
 		// 'width': 'mapData(weight, 40, 80, 20, 60)',
 		'content': 'data(name)',
 		'text-valign': 'center',
-		'text-outline-width': 2,
-		'text-outline-color': 'data(scolor)',
+		'text-outline-width': .6,
+		'text-outline-color': 'white',
+		"text-wrap": "wrap",
+		"text-max-width": 280,
 		'background-color': 'data(scolor)',
-		'color': '#fff'
+		'color': '#123',
+
 	    })
 	    .selector(':selected')
 	    .css({
@@ -46,7 +49,15 @@ $.getJSON(`/ego_json/${ego_id}`, function (data) {
 	    }),
 
 	layout: {
-	    name: 'circle'
+	    name: 'dagre',
+	    rankDir: 'LR',
+	    ranker: 'longest-path',
 	}
     });
+
+
+    cy.on('tap', 'node', function(){
+	window.location.href = this.data('href');
+    });
+
 });

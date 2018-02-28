@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import json
-from .models import Alter
+from .models import Alter, ActionEdge
 from django.shortcuts import render
 
 from django.http import HttpResponse
@@ -13,9 +13,10 @@ def sector_color(alter):
     sector_color = {'Academia': 'blue',
                     'Gobierno': 'green',
                     None: 'orange',
+                    'Ego': 'red',
                     'Otros': 'purple',
                     'Privado': 'purple',
-                    'Sociedad_Civil': 'yellow'}
+                    'Sociedad_Civil': 'gold'}
     if alter.sector:
         sector = alter.sector.name
     else:
@@ -24,29 +25,77 @@ def sector_color(alter):
     return sector_color[sector]
 
 
+def practice_color(action):
+    practice_color = {
+        'Research': 'darkcyan',
+        'Training': 'firebrick',
+        'Agricultural/ecological training': 'orange',
+        'Outreach': 'green',
+        'Market': 'blue',
+        'Education': 'teal',
+        'Funding': 'grey',
+        'Collaboration': 'red',
+        'Financial/commercial training': 'yellow',
+        'Social organization': 'cornflowerblue',
+        'Tourism': 'forestgreen',
+        'Management': 'dodgerblue',
+        'Networking': 'goldenrod',
+        'Production': 'midnightblue',
+        'Construction': 'darkgreen',
+        'Culture': 'cyan',
+        'Consultancy': 'hotpink',
+        'Ecological conservation': 'lightcoral',
+        'Citizen assistance': 'indigo',
+        'Legal training': 'brown',
+    }
+    if action.category:
+        return practice_color[action.category.name]
+    else:
+        return "purple"
+
+
 def ego_net_json(request, ego_id):
     ego = Alter.objects.get(id=ego_id)
 
     g = nx.Graph()
 
+    # create network from egos to alters
     for e in ego.ego_net.all():
         if e.source.name.startswith('TL0'):
-            source_shape = "triangle"
+            g.add_node(e.source.id,
+                       name=e.source.name,
+                       shape="triangle",
+                       scolor=sector_color(e.source))
         else:
-            source_shape = "ellipse"
-        g.add_node(e.source.id,
-                   name=e.source.name,
-                   shape=source_shape,
-                   scolor=sector_color(e.source))
+            g.add_node(e.source.id,
+                       name=e.source.name,
+                       shape="ellipse",
+                       scolor=sector_color(e.source))
+            for action_e in ActionEdge.objects.filter(alter=e.source):
+                g.add_node(action_e.action.action,
+                           name=action_e.action.action,
+                           shape='rectangle',
+                           scolor=practice_color(action_e.action))
+                g.add_edge(action_e.alter.id,
+                           action_e.action.action)
 
         if e.target.name.startswith('TL0'):
-            target_shape = "triangle"
+            g.add_node(e.target.id,
+                       name=e.target.name,
+                       shape="triangle",
+                       scolor=sector_color(e.target))
         else:
-            target_shape = "ellipse"
-        g.add_node(e.target.id,
-                   name=e.target.name,
-                   shape=target_shape,
-                   scolor=sector_color(e.target))
+            g.add_node(e.target.id,
+                       name=e.target.name,
+                       shape="ellipse",
+                       scolor=sector_color(e.target))
+            for action_e in ActionEdge.objects.filter(alter=e.target):
+                g.add_node(action_e.action.action,
+                           name=action_e.action.action,
+                           shape='rectangle',
+                           scolor=practice_color(action_e.action))
+                g.add_edge(action_e.alter.id,
+                           action_e.action.action)
 
         g.add_edge(e.source.id,
                    e.target.id,
@@ -54,6 +103,7 @@ def ego_net_json(request, ego_id):
                    interaction=e.interaction)
 
     net = {'nodes': [{'data': {'id': n,
+                               'href': '/ego/%s/' % n,
                                'name': g.node[n]['name'],
                                'shape': g.node[n]['shape'],
                                'scolor': g.node[n]['scolor']}}
