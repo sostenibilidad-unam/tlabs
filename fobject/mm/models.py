@@ -64,7 +64,13 @@ class EgoEdge(models.Model):
     target = models.ForeignKey(Alter, related_name='alter_for')
 
     distance = models.IntegerField()
+
     interaction = models.CharField(max_length=20)
+
+    polarity = models.IntegerField(default=0)
+
+    influence_source = models.IntegerField(default=0)
+    influence_target = models.IntegerField(default=0)
 
     fase = models.ForeignKey(Fase, null=True)
 
