@@ -52,6 +52,8 @@ $.getJSON(`/ego_json/${ego_id}`, function (data) {
 	    name: 'dagre',
 	    rankDir: 'LR',
 	    ranker: 'longest-path',
+	    nodeDimensionsIncludeLabels: true,
+	    rankSep: 500,
 	}
     });
 

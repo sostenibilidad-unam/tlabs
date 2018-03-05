@@ -57,7 +57,7 @@ def practice_color(action):
 def ego_net_json(request, ego_id):
     ego = Alter.objects.get(id=ego_id)
 
-    g = nx.Graph()
+    g = nx.DiGraph()
 
     # create network from egos to alters
     for e in ego.ego_net.all():
