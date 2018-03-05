@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block "main" %}
+<h1 class="ui header">{{ title }}</h1>
+
+<form class="ui form" method="POST" action="{% url 'ana_setup' %}">
+  {% csrf_token %}
+  <div class="field">
+    <label>Phase</label>
+    {% for p in phases %}
+    <div class="ui radio checkbox">
+      <input type="radio" name="phase_{{ p.id }}"
+	     {% if forloop.first %}
+	     checked="true"
+	     {% endif %}
+	     />
+      <label>{{ p.phase }}</label>
+    </div>
+    {% endfor %}
+  </div>
+
+  <h4 class="ui dividing header">Egos</h4>
+  {% for a in egos %}
+  <div class="field">
+    <div class="ui checkbox">
+      <input name="ego_{{ a.id }}" type="checkbox">
+      <label>{{ a.name }}</label>
+    </div>
+  </div>
+  {% endfor %}
+
+  <input type="submit" value="view" class="ui button" />
+</form>
+
+
+{% endblock %}

@@ -2,15 +2,16 @@
 from __future__ import unicode_literals
 import json
 import networkx as nx
+import colors
 
 from django.db import models
 
 
-class Fase(models.Model):
-    fase = models.CharField(max_length=200)
+class Phase(models.Model):
+    phase = models.CharField(max_length=200)
 
     def __unicode__(self):
-        return u"%s" % self.fase
+        return u"%s" % self.phase
 
 
 class Sector(models.Model):
@@ -72,7 +73,7 @@ class EgoEdge(models.Model):
     influence_source = models.IntegerField(default=0)
     influence_target = models.IntegerField(default=0)
 
-    fase = models.ForeignKey(Fase, null=True)
+    phase = models.ForeignKey(Phase, null=True)
 
     def __unicode__(self):
         return u"%s<-%s->%s" % (self.source, self.distance, self.target)
@@ -82,7 +83,7 @@ class PowerEdge(models.Model):
     source = models.ForeignKey(Alter, related_name='powers')
     target = models.ForeignKey(Power, related_name='wielded_by')
 
-    fase = models.ForeignKey(Fase, null=True)
+    phase = models.ForeignKey(Phase, null=True)
 
     def __unicode__(self):
         return u"%s -- %s" % (self.source, self.target)
@@ -125,7 +126,7 @@ class ActionEdge(models.Model):
                                related_name='actor_set',
                                null=True)
 
-    fase = models.ForeignKey(Fase, null=True)
+    phase = models.ForeignKey(Phase, null=True)
 
     class Meta:
         verbose_name_plural = "Action Edges"
@@ -153,7 +154,7 @@ class MentalEdge(models.Model):
                                related_name='caused_by',
                                null=True)
 
-    fase = models.ForeignKey(Fase, null=True)
+    phase = models.ForeignKey(Phase, null=True)
 
     def __unicode__(self):
         return u"(%s)->(%s)" % (self.source, self.target)
@@ -179,3 +180,71 @@ class Networks:
         for a in Action.objects.all():
             a.update_in_degree()
             a.save()
+
+
+class AgencyNetwork:
+    def __init__(self, ego_ids, phase_id):
+        phase = Phase.objects.get(pk=phase_id)
+        g = nx.DiGraph()
+        for ego_id in ego_ids:
+            ego = Alter.objects.get(id=ego_id)
+
+            # create network from egos to alters
+            for e in ego.ego_net.filter(phase=phase):
+                if e.source.name.startswith('TL0'):
+                    g.add_node(e.source.id,
+                               name=e.source.name,
+                               shape="triangle",
+                               scolor=colors.sector_color(e.source))
+                else:
+                    g.add_node(e.source.id,
+                               name=e.source.name,
+                               shape="ellipse",
+                               scolor=colors.sector_color(e.source))
+                    for action_e in ActionEdge.objects.filter(
+                            alter=e.source).filter(phase=phase):
+                        g.add_node(action_e.action.action,
+                                   name=action_e.action.action,
+                                   shape='rectangle',
+                                   scolor=colors.practice_color(
+                                       action_e.action))
+                        g.add_edge(action_e.alter.id,
+                                   action_e.action.action)
+
+                if e.target.name.startswith('TL0'):
+                    g.add_node(e.target.id,
+                               name=e.target.name,
+                               shape="triangle",
+                               scolor=colors.sector_color(e.target))
+                else:
+                    g.add_node(e.target.id,
+                               name=e.target.name,
+                               shape="ellipse",
+                               scolor=colors.sector_color(e.target))
+                    for action_e in ActionEdge.objects.filter(
+                            alter=e.target).filter(phase=phase):
+                        g.add_node(action_e.action.action,
+                                   name=action_e.action.action,
+                                   shape='rectangle',
+                                   scolor=colors.practice_color(
+                                       action_e.action))
+                        g.add_edge(action_e.alter.id,
+                                   action_e.action.action)
+
+                g.add_edge(e.source.id,
+                           e.target.id,
+                           distance=e.distance,
+                           interaction=e.interaction)
+
+        self.g = g
+
+    def get_json(self):
+        net = {'nodes': [{'data': {'id': n,
+                                   'href': '/alter/%s/' % n,
+                                   'name': self.g.node[n]['name'],
+                                   'shape': self.g.node[n]['shape'],
+                                   'scolor': self.g.node[n]['scolor']}}
+                         for n in self.g.nodes],
+               'edges': [{'data': {'source': e[0],
+                                   'target': e[1]}} for e in self.g.edges]}
+        return net

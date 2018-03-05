@@ -54,37 +54,9 @@
 	  <img class="logo" src="{% static "logo_white.png" %}">
 	  T-Labs
 	</a>
-	<a href="#" class="item">Home</a>
-	<div class="ui simple dropdown item">
-	  Egos <i class="dropdown icon"></i>
-	  <div class="menu">
-
-
-
-	    {% for a in egos %}
-	    <a class="item" href="/ego/{{ a.id }}">{{ a.name }}</a>
-	    {% endfor %}
-
-
-	    <!-- <a class="item" href="#">Link Item</a> -->
-	    <!-- <a class="item" href="#">Link Item</a> -->
-	    <!-- <div class="divider"></div> -->
-	    <!-- <div class="header">Header Item</div> -->
-	    <!-- <div class="item"> -->
-	    <!--   <i class="dropdown icon"></i> -->
-	    <!--   Sub Menu -->
-	    <!--   <div class="menu"> -->
-	    <!--	<a class="item" href="#">Link Item</a> -->
-	    <!--	<a class="item" href="#">Link Item</a> -->
-	    <!--   </div> -->
-	    <!-- </div> -->
-	    <!-- <a class="item" href="#">Link Item</a> -->
-	  </div>
-	</div>
+	<a href="{% url 'ana_setup' %}" class="item">Setup</a>
       </div>
     </div>
-
-
 
     <div class="ui main text container">
       {% block "main" %}

@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-from .models import Alter, EgoEdge, Action, Fase, \
+from .models import Alter, EgoEdge, Action, Phase, \
     Sector, ActionEdge, Variable, MentalEdge, Category, \
     Power, PowerEdge
 
@@ -46,16 +46,16 @@ admin.site.register(Alter, AlterAdmin)
 
 
 class EgoEdgeAdmin(admin.ModelAdmin):
-    search_fields = ['source__name', 'target__name', 'fase__fase']
-    list_display = ['id', 'source', 'target', 'distance', 'fase']
+    search_fields = ['source__name', 'target__name', 'phase__phase']
+    list_display = ['id', 'source', 'target', 'distance', 'phase']
 
     actions = ['copy_to_latest_phase']
 
     def copy_to_latest_phase(self, request, queryset):
-        fase = Fase.objects.last()
+        phase = Phase.objects.last()
         for edge in queryset:
             edge.pk = None
-            edge.fase = fase
+            edge.phase = phase
             edge.save()
     copy_to_latest_phase.\
         short_description = "Copy selected edges to latest phase"
@@ -65,7 +65,7 @@ admin.site.register(EgoEdge, EgoEdgeAdmin)
 
 
 admin.site.register(Sector)
-admin.site.register(Fase)
+admin.site.register(Phase)
 admin.site.register(Category)
 admin.site.register(Variable)
 
@@ -80,15 +80,15 @@ admin.site.register(Action, ActionAdmin)
 
 class ActionEdgeAdmin(admin.ModelAdmin):
     search_fields = ['alter__name', 'action__action']
-    list_display = ['id', 'alter', 'action', 'fase']
+    list_display = ['id', 'alter', 'action', 'phase']
 
     actions = ['copy_to_latest_phase']
 
     def copy_to_latest_phase(self, request, queryset):
-        fase = Fase.objects.last()
+        phase = Phase.objects.last()
         for edge in queryset:
             edge.pk = None
-            edge.fase = fase
+            edge.phase = phase
             edge.save()
     copy_to_latest_phase.\
         short_description = "Copy selected edges to latest phase"
@@ -99,15 +99,15 @@ admin.site.register(ActionEdge, ActionEdgeAdmin)
 
 class MentalEdgeAdmin(admin.ModelAdmin):
     search_fields = ['ego__name']
-    list_display = ['ego', 'source', 'target', 'fase']
+    list_display = ['ego', 'source', 'target', 'phase']
 
     actions = ['copy_to_latest_phase']
 
     def copy_to_latest_phase(self, request, queryset):
-        fase = Fase.objects.last()
+        phase = Phase.objects.last()
         for edge in queryset:
             edge.pk = None
-            edge.fase = fase
+            edge.phase = phase
             edge.save()
     copy_to_latest_phase.\
         short_description = "Copy selected edges to latest phase"
@@ -120,15 +120,15 @@ admin.site.register(Power)
 
 class PowerEdgeAdmin(admin.ModelAdmin):
     search_fields = ['ego__name', 'power__name']
-    list_display = ['source', 'target', 'fase']
+    list_display = ['source', 'target', 'phase']
 
     actions = ['copy_to_latest_phase']
 
     def copy_to_latest_phase(self, request, queryset):
-        fase = Fase.objects.last()
+        phase = Phase.objects.last()
         for edge in queryset:
             edge.pk = None
-            edge.fase = fase
+            edge.phase = phase
             edge.save()
     copy_to_latest_phase.\
         short_description = "Copy selected edges to latest phase"
