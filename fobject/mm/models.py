@@ -195,17 +195,20 @@ class AgencyNetwork:
                     g.add_node(e.source.id,
                                name=e.source.name,
                                shape="triangle",
+                               href='/alter/%s/' % e.source.id,
                                scolor=colors.sector_color(e.source))
                 else:
                     g.add_node(e.source.id,
                                name=e.source.name,
                                shape="ellipse",
+                               href='/alter/%s/' % e.source.id,
                                scolor=colors.sector_color(e.source))
                     for action_e in ActionEdge.objects.filter(
                             alter=e.source).filter(phase=phase):
                         g.add_node(action_e.action.action,
                                    name=action_e.action.action,
                                    shape='rectangle',
+                                   href='/action/%s/' % action_e.action.id,
                                    scolor=colors.practice_color(
                                        action_e.action))
                         g.add_edge(action_e.alter.id,
@@ -215,17 +218,20 @@ class AgencyNetwork:
                     g.add_node(e.target.id,
                                name=e.target.name,
                                shape="triangle",
+                               href='/alter/%s/' % e.target.id,
                                scolor=colors.sector_color(e.target))
                 else:
                     g.add_node(e.target.id,
                                name=e.target.name,
                                shape="ellipse",
+                               href='/alter/%s/' % e.target.id,
                                scolor=colors.sector_color(e.target))
                     for action_e in ActionEdge.objects.filter(
                             alter=e.target).filter(phase=phase):
                         g.add_node(action_e.action.action,
                                    name=action_e.action.action,
                                    shape='rectangle',
+                                   href='/action/%s/' % action_e.action.id,
                                    scolor=colors.practice_color(
                                        action_e.action))
                         g.add_edge(action_e.alter.id,
@@ -239,8 +245,9 @@ class AgencyNetwork:
         self.g = g
 
     def get_json(self):
+        print len(self.g.nodes)
         net = {'nodes': [{'data': {'id': n,
-                                   'href': '/alter/%s/' % n,
+                                   'href': self.g.node[n]['href'],
                                    'name': self.g.node[n]['name'],
                                    'shape': self.g.node[n]['shape'],
                                    'scolor': self.g.node[n]['scolor']}}

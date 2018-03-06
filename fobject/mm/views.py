@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 import json
-from .models import Alter, Phase, AgencyNetwork
+from .models import Alter, Phase, AgencyNetwork, Action
 from django.shortcuts import render, redirect
 from django.views import View
 
@@ -26,7 +26,16 @@ def ana_json(request):
 
 
 def view_alter(request, alter_id):
-    request.session['ego_ids'] = [alter_id, ]
+    request.session['ego_ids'] = [int(alter_id), ]
+    return redirect('ana_view')
+
+
+def view_action(request, action_id):
+    phase = Phase.objects.get(pk=request.session['phase_id'])
+    action = Action.objects.get(pk=action_id)
+    request.session['ego_ids'] = [e.alter.id
+                                  for e in
+                                  action.actor_set.filter(phase=phase)]
     return redirect('ana_view')
 
 

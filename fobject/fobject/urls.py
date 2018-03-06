@@ -40,6 +40,11 @@ urlpatterns = [
         views.view_alter,
         name='view_alter'),
 
+    url(r'^action/(?P<action_id>[0-9]+)/$',
+        views.view_action,
+        name='view_action'),
+
+
     url(r'^mm/(?P<ego_id>[0-9]+)/$', views.mm, name='mm'),
     url(r'^mm_json/(?P<ego_id>[0-9]+)/$', views.mm_json, name='mm_json'),
 
