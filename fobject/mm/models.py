@@ -245,7 +245,6 @@ class AgencyNetwork:
         self.g = g
 
     def get_json(self):
-        print len(self.g.nodes)
         net = {'nodes': [{'data': {'id': n,
                                    'href': self.g.node[n]['href'],
                                    'name': self.g.node[n]['name'],

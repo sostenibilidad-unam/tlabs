@@ -6,9 +6,7 @@ from django.views import View
 
 from django.http import HttpResponse
 
-
 import networkx as nx
-from pprint import pprint
 
 
 def index(request):
@@ -66,15 +64,12 @@ class AnaSetup(View):
     def post(self, request, *args, **kwargs):
         ego_ids = []
         for key in request.POST:
-            if 'phase' in key:
-                k, phase_id = key.split('_')
-                request.session['phase_id'] = int(phase_id)
-            elif 'ego' in key:
+            if 'ego' in key:
                 k, ego_id = key.split('_')
                 ego_ids.append(int(ego_id))
 
         request.session['ego_ids'] = ego_ids
-
+        request.session['phase_id'] = request.POST['phase']
         return redirect('ana_view')
 
 

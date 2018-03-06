@@ -7,14 +7,17 @@
 <h1 class="ui header">{{ title }}</h1>
 
 <form class="ui form" method="POST" action="{% url 'ana_setup' %}">
+
   {% csrf_token %}
+
   <div class="field">
     <label>Phase</label>
     {% for p in phases %}
     <div class="ui radio checkbox">
-      <input type="radio" name="phase_{{ p.id }}"
+      <input type="radio" name="phase"
+	     value="{{ p.id }}"
 	     {% if forloop.first %}
-	     checked="true"
+	     checked="checked"
 	     {% endif %}
 	     />
       <label>{{ p.phase }}</label>
