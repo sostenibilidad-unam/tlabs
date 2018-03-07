@@ -1,12 +1,10 @@
 from __future__ import unicode_literals
 import json
-from .models import Alter, Phase, AgencyNetwork, Action
+from .models import Alter, Phase, AgencyNetwork, Action, MentalModel
 from django.shortcuts import render, redirect
 from django.views import View
 
 from django.http import HttpResponse
-
-import networkx as nx
 
 
 def index(request):
@@ -35,6 +33,23 @@ def view_action(request, action_id):
                                   for e in
                                   action.actor_set.filter(phase=phase)]
     return redirect('ana_view')
+
+
+def mm_json(request):
+    mm = MentalModel(ego_ids=request.session['ego_ids'],
+                     phase_id=request.session['phase_id'])
+    return HttpResponse(json.dumps(mm.get_json()))
+
+
+class MMView(View):
+
+    template = 'mm.html'
+
+    def get(self, request, *args, **kwargs):
+        context = {'ego_ids': request.session['ego_ids']}
+        return render(request,
+                      self.template,
+                      context)
 
 
 class Ana(View):
@@ -71,29 +86,3 @@ class AnaSetup(View):
         request.session['ego_ids'] = ego_ids
         request.session['phase_id'] = request.POST['phase']
         return redirect('ana_view')
-
-
-def mm_net_json(request, ego_id):
-    ego = Alter.objects.get(id=ego_id)
-
-    g = nx.Graph()
-
-    for e in ego.ego_net.all():
-        g.add_edge(e.source.name,
-                   e.target.name,
-                   distance=e.distance,
-                   interaction=e.interaction)
-
-    return HttpResponse(json.dumps(nx.node_link_data(g), indent=2))
-
-
-def mm(request, ego_id):
-    ego = Alter.objects.get(id=ego_id)
-    context = {'ego': ego,
-               'egos': Alter.objects.filter(name__startswith="TL0").all()}
-    return render(request, 'mm.html', context)
-
-
-def mm_json(request, ego_id):
-    ego = Alter.objects.get(id=ego_id)
-    return HttpResponse(ego.mental_model())

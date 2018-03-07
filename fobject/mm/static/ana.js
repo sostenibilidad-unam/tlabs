@@ -1,7 +1,6 @@
 var ego_ids = document.currentScript.getAttribute('ego_ids');
 
 $.getJSON("/ana_json/", function (data) {
-    console.log(data);
     var cy = cytoscape({
 	container: document.getElementById('cy'),
 	elements: data,

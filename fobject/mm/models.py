@@ -39,13 +39,23 @@ class Alter(models.Model):
     avatar_pic = models.ImageField(blank=True, null=True,
                                    upload_to='avatars/')
 
-    def mental_model(self):
+    def mental_model(self, phase):
         g = nx.Graph()
 
-        for e in self.mentaledge_set.all():
+        for e in self.mentaledge_set.filter(phase=phase):
+            g.add_node(e.source.name,
+                       shape="ellipse"
+                       if "Proceso" in e.source.mental_type
+                       else "rectangle")
+
+            g.add_node(e.target.name,
+                       shape="ellipse"
+                       if "Proceso" in e.target.mental_type
+                       else "rectangle")
+
             g.add_edge(e.source.name,
                        e.target.name)
-        return json.dumps(nx.node_link_data(g), indent=2)
+        return g
 
     def image_tag(self):
         if self.avatar_pic:
@@ -252,6 +262,26 @@ class AgencyNetwork:
                                    'name': self.g.node[n]['name'],
                                    'shape': self.g.node[n]['shape'],
                                    'scolor': self.g.node[n]['scolor']}}
+                         for n in self.g.nodes],
+               'edges': [{'data': {'source': e[0],
+                                   'target': e[1]}} for e in self.g.edges]}
+        return net
+
+
+class MentalModel:
+    def __init__(self, ego_ids, phase_id):
+        phase = Phase.objects.get(pk=phase_id)
+        g = nx.Graph()
+        for ego_id in ego_ids:
+            ego = Alter.objects.get(id=ego_id)
+            h = ego.mental_model(phase)
+            g = nx.compose(g, h)
+
+        self.g = g
+
+    def get_json(self):
+        net = {'nodes': [{'data': {'id': n,
+                                   'shape': self.g.node[n]['shape']}}
                          for n in self.g.nodes],
                'edges': [{'data': {'source': e[0],
                                    'target': e[1]}} for e in self.g.edges]}

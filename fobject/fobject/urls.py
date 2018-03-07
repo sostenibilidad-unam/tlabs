@@ -44,8 +44,11 @@ urlpatterns = [
         views.view_action,
         name='view_action'),
 
+    url(r'^mm$',
+        views.MMView.as_view(),
+        name="mm_view"),
 
-    url(r'^mm/(?P<ego_id>[0-9]+)/$', views.mm, name='mm'),
-    url(r'^mm_json/(?P<ego_id>[0-9]+)/$', views.mm_json, name='mm_json'),
+    url(r'^mm_json/$',
+        views.mm_json, name='mm_json'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
