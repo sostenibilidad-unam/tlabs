@@ -67,7 +67,13 @@ admin.site.register(EgoEdge, EgoEdgeAdmin)
 admin.site.register(Sector)
 admin.site.register(Phase)
 admin.site.register(Category)
-admin.site.register(Variable)
+
+
+class VariableAdmin(admin.ModelAdmin):
+    list_display = ['name', 'mental_type']
+
+
+admin.site.register(Variable, VariableAdmin)
 
 
 class ActionAdmin(admin.ModelAdmin):

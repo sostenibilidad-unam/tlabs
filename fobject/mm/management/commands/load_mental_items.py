@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from mm.models import Item, MentalType
+from mm.models import Variable
 import csv
 import argparse
 
@@ -16,16 +16,12 @@ class Command(BaseCommand):
         for row in reader:
 
             item_type = row['TYPE']
-            t, created = MentalType.objects.get_or_create(name=item_type)
-            if created:
-                self.stdout.write("%s: created type %s" % (options['csv'].name, t))
-            else:
-                self.stdout.write("%s: found type %s" % (options['csv'].name, t))
-
             item_name = row['ITEM']
-            i, created = Item.objects.get_or_create(name=item_name,
-                                                    mental_type=t)
+            i, created = Variable.objects.get_or_create(name=item_name,
+                                                        mental_type=item_type)
             if created:
-                self.stdout.write("%s: created item %s" % (options['csv'].name, i))
+                self.stdout.write("%s: created item %s"
+                                  % (options['csv'].name, i))
             else:
-                self.stdout.write("%s: found item %s" % (options['csv'].name, i))
+                self.stdout.write("%s: found item %s"
+                                  % (options['csv'].name, i))

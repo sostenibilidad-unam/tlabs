@@ -138,8 +138,10 @@ class ActionEdge(models.Model):
 class Variable(models.Model):
     name = models.CharField(max_length=200)
     mental_type = models.CharField(max_length=200,
-                                   choices=(('proceso', 'proceso'),
-                                            ('estado', 'estado')))
+                                   choices=(('Proceso', 'Proceso'),
+                                            ('Estado', 'Estado'),
+                                            ('NUEVO_Proceso', 'NUEVO_Proceso'),
+                                            ('NUEVO_Estado', 'NUEVO_Estado')))
 
     def __unicode__(self):
         return u"%s" % self.name
