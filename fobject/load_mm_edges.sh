@@ -1,0 +1,17 @@
+./manage.py load_mental_edges --ego TL001 --phase baseline --csv ../data/v5/TL001_MM.csv
+./manage.py load_mental_edges --ego TL002 --phase baseline --csv ../data/v5/TL002_MM.csv
+./manage.py load_mental_edges --ego TL004 --phase baseline --csv ../data/v5/TL004_MM.csv
+./manage.py load_mental_edges --ego TL005 --phase baseline --csv ../data/v5/TL005_MM.csv
+./manage.py load_mental_edges --ego TL006 --phase baseline --csv ../data/v5/TL006_MM.csv
+./manage.py load_mental_edges --ego TL007 --phase baseline --csv ../data/v5/TL007_MM.csv
+./manage.py load_mental_edges --ego TL008 --phase baseline --csv ../data/v5/TL008_MM.csv
+./manage.py load_mental_edges --ego TL009 --phase baseline --csv ../data/v5/TL009_MM.csv
+./manage.py load_mental_edges --ego TL010 --phase baseline --csv ../data/v5/TL010_MM.csv
+./manage.py load_mental_edges --ego TL011 --phase baseline --csv ../data/v5/TL011_MM.csv
+./manage.py load_mental_edges --ego TL012 --phase baseline --csv ../data/v5/TL012_MM.csv
+./manage.py load_mental_edges --ego TL013 --phase baseline --csv ../data/v5/TL013_MM.csv
+./manage.py load_mental_edges --ego TL014 --phase baseline --csv ../data/v5/TL014_MM.csv
+./manage.py load_mental_edges --ego TL015 --phase baseline --csv ../data/v5/TL015_MM.csv
+./manage.py load_mental_edges --ego TL016 --phase baseline --csv ../data/v5/TL016_MM.csv
+./manage.py load_mental_edges --ego TL017 --phase baseline --csv ../data/v5/TL017_MM.csv
+./manage.py load_mental_edges --ego TL018 --phase baseline --csv ../data/v5/TL018_MM.csv
