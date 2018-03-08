@@ -46,7 +46,10 @@ class MMView(View):
     template = 'mm.html'
 
     def get(self, request, *args, **kwargs):
-        context = {'ego_ids': request.session['ego_ids']}
+        context = {'ego_ids': request.session['ego_ids'],
+                   'title': ", ".join(
+                       [Alter.objects.get(pk=eid).name
+                        for eid in request.session['ego_ids']])}
         return render(request,
                       self.template,
                       context)
@@ -57,7 +60,10 @@ class Ana(View):
     template = 'ana.html'
 
     def get(self, request, *args, **kwargs):
-        context = {'ego_ids': request.session['ego_ids']}
+        context = {'ego_ids': request.session['ego_ids'],
+                   'title': ", ".join(
+                       [Alter.objects.get(pk=eid).name
+                        for eid in request.session['ego_ids']])}
         return render(request,
                       self.template,
                       context)
@@ -85,4 +91,8 @@ class AnaSetup(View):
 
         request.session['ego_ids'] = ego_ids
         request.session['phase_id'] = request.POST['phase']
-        return redirect('ana_view')
+
+        if request.POST['next'] == 'Agency Network':
+            return redirect('ana_view')
+        elif request.POST['next'] == 'Mental Model':
+            return redirect('mm_view')
