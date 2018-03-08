@@ -1,6 +1,7 @@
 var ego_ids = document.currentScript.getAttribute('ego_ids');
 
 $.getJSON("/ana_json/", function (data) {
+    console.log(data);
     var cy = cytoscape({
 	container: document.getElementById('cy'),
 	elements: data,
@@ -9,10 +10,11 @@ $.getJSON("/ana_json/", function (data) {
 	    .selector('node')
 	    .css({
 		'shape': 'data(shape)',
-		// 'width': 'mapData(weight, 40, 80, 20, 60)',
+		'width': 160,
+		'height': 100,
 		'content': 'data(name)',
 		'text-valign': 'center',
-		'text-outline-width': .6,
+		'text-outline-width': 2.4,
 		'text-outline-color': 'white',
 		"text-wrap": "wrap",
 		"text-max-width": 280,
@@ -29,12 +31,14 @@ $.getJSON("/ana_json/", function (data) {
 	    .css({
 		'curve-style': 'bezier',
 		'opacity': 0.666,
-		'width': 'mapData(strength, 70, 100, 2, 6)',
-		'target-arrow-shape': 'triangle',
+		'width': 'mapData(distance, 1, 3, 2, 10)',
 		'source-arrow-shape': 'circle',
-//		'line-color': 'data(faveColor)',
-//		'source-arrow-color': 'data(faveColor)',
-//		'target-arrow-color': 'data(faveColor)'
+		'target-arrow-shape': 'triangle',
+		'line-color': 'data(polarity)',
+		'source-arrow-color': 'data(polarity)',
+		'target-arrow-color': 'data(polarity)',
+		'source-label': 'data(source_label)',
+		'target-label': 'data(target_label)',
 	    })
 	    .selector('edge.questionable')
 	    .css({

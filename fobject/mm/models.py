@@ -251,9 +251,12 @@ class AgencyNetwork:
 
                 g.add_edge(e.source.id,
                            e.target.id,
-                           distance=e.distance,
-                           interaction=e.interaction)
+                           distance=4 - e.distance,
+                           polarity=e.polarity,
+                           i_s=e.influence_source,
+                           i_t=e.influence_target)
 
+        print [g.get_edge_data(*e) for e in g.edges]
         self.g = g
 
     def get_json(self):
@@ -263,8 +266,21 @@ class AgencyNetwork:
                                    'shape': self.g.node[n]['shape'],
                                    'scolor': self.g.node[n]['scolor']}}
                          for n in self.g.nodes],
-               'edges': [{'data': {'source': e[0],
-                                   'target': e[1]}} for e in self.g.edges]}
+               'edges': [{'data':
+                          {'source': e[0],
+                           'target': e[1],
+                           'source_label': self.g.get_edge_data(
+                               *e).get('i_s', ''),
+                           'target_label': self.g.get_edge_data(
+                               *e).get('i_t', ''),
+                           'distance': self.g.get_edge_data(
+                               *e).get('distance', 0),
+                           'polarity': "crimson"
+                           if self.g.get_edge_data(*e).get('polarity', 0) == -1
+                           else "cornflowerblue"
+                           if self.g.get_edge_data(*e).get('polarity', 0) == 1
+                           else "grey"}}
+                         for e in self.g.edges]}
         return net
 
 
