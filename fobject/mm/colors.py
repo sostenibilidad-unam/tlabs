@@ -2,7 +2,7 @@ def sector_color(alter):
     sector_color = {'Academia': 'blue',
                     'Gobierno': 'green',
                     None: 'orange',
-                    'Ego': 'red',
+                    'Ego': 'tomato',
                     'Otros': 'purple',
                     'Privado': 'purple',
                     'Sociedad_Civil': 'gold'}

@@ -51,4 +51,4 @@ urlpatterns = [
     url(r'^mm_json/$',
         views.mm_json, name='mm_json'),
 
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

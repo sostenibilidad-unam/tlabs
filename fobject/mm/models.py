@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-import json
 import networkx as nx
 import colors
-
+from django.conf import settings
 from django.db import models
 
 
@@ -56,6 +55,12 @@ class Alter(models.Model):
             g.add_edge(e.source.name,
                        e.target.name)
         return g
+
+    def avatar_url(self):
+        if self.avatar_pic:
+            return u"%s%s" % (settings.MEDIA_URL, self.avatar_pic)
+        else:
+            return None
 
     def image_tag(self):
         if self.avatar_pic:
@@ -206,13 +211,18 @@ class AgencyNetwork:
                 if e.source.name.startswith('TL0'):
                     g.add_node(e.source.id,
                                name=e.source.name,
-                               shape="triangle",
+                               shape="ellipse",
+                               width=260,
+                               height=260,
+                               avatar=e.source.avatar_url(),
                                href='/alter/%s/' % e.source.id,
                                scolor=colors.sector_color(e.source))
                 else:
                     g.add_node(e.source.id,
                                name=e.source.name,
                                shape="ellipse",
+                               width=160,
+                               height=100,
                                href='/alter/%s/' % e.source.id,
                                scolor=colors.sector_color(e.source))
                     for action_e in ActionEdge.objects.filter(
@@ -220,6 +230,8 @@ class AgencyNetwork:
                         g.add_node(action_e.action.action,
                                    name=action_e.action.action,
                                    shape='rectangle',
+                                   width=160,
+                                   height=100,
                                    href='/action/%s/' % action_e.action.id,
                                    scolor=colors.practice_color(
                                        action_e.action))
@@ -229,13 +241,18 @@ class AgencyNetwork:
                 if e.target.name.startswith('TL0'):
                     g.add_node(e.target.id,
                                name=e.target.name,
-                               shape="triangle",
+                               shape="ellipse",
+                               width=260,
+                               height=260,
+                               avatar=e.target.avatar_url(),
                                href='/alter/%s/' % e.target.id,
                                scolor=colors.sector_color(e.target))
                 else:
                     g.add_node(e.target.id,
                                name=e.target.name,
                                shape="ellipse",
+                               width=160,
+                               height=100,
                                href='/alter/%s/' % e.target.id,
                                scolor=colors.sector_color(e.target))
                     for action_e in ActionEdge.objects.filter(
@@ -243,6 +260,8 @@ class AgencyNetwork:
                         g.add_node(action_e.action.action,
                                    name=action_e.action.action,
                                    shape='rectangle',
+                                   width=160,
+                                   height=100,
                                    href='/action/%s/' % action_e.action.id,
                                    scolor=colors.practice_color(
                                        action_e.action))
@@ -256,7 +275,6 @@ class AgencyNetwork:
                            i_s=e.influence_source,
                            i_t=e.influence_target)
 
-        print [g.get_edge_data(*e) for e in g.edges]
         self.g = g
 
     def get_json(self):
@@ -264,6 +282,10 @@ class AgencyNetwork:
                                    'href': self.g.node[n]['href'],
                                    'name': self.g.node[n]['name'],
                                    'shape': self.g.node[n]['shape'],
+                                   'width': self.g.node[n]['width'],
+                                   'height': self.g.node[n]['height'],
+                                   'avatar': "%s"
+                                   % self.g.node[n].get('avatar', '/media/'),
                                    'scolor': self.g.node[n]['scolor']}}
                          for n in self.g.nodes],
                'edges': [{'data':

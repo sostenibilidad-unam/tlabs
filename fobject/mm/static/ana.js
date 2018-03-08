@@ -2,7 +2,7 @@ var ego_ids = document.currentScript.getAttribute('ego_ids');
 
 $.getJSON("/ana_json/", function (data) {
     console.log(data);
-    var cy = cytoscape({
+    var Cy = cytoscape({
 	container: document.getElementById('cy'),
 	elements: data,
 
@@ -10,17 +10,18 @@ $.getJSON("/ana_json/", function (data) {
 	    .selector('node')
 	    .css({
 		'shape': 'data(shape)',
-		'width': 160,
-		'height': 100,
+		'width': 'data(width)',
+		'height': 'data(height)',
 		'content': 'data(name)',
 		'text-valign': 'center',
-		'text-outline-width': 2.4,
-		'text-outline-color': 'white',
 		"text-wrap": "wrap",
 		"text-max-width": 280,
 		'background-color': 'data(scolor)',
-		'color': '#123',
-
+		'color': 'white',
+		'text-outline-width': 2.4,
+		'text-outline-color': 'grey',
+		'background-image': 'data(avatar)',
+		'background-fit': 'cover'
 	    })
 	    .selector(':selected')
 	    .css({
@@ -61,7 +62,7 @@ $.getJSON("/ana_json/", function (data) {
     });
 
 
-    cy.on('tap', 'node', function(){
+    Cy.on('tap', 'node', function(){
 	window.location.href = this.data('href');
     });
 
