@@ -35,6 +35,8 @@ $.getJSON("/mm_json/", function (data) {
 		'curve-style': 'bezier',
 		'opacity': 0.666,
 		'line-color': 'firebrick',
+		'target-arrow-shape': 'triangle',
+		'source-arrow-shape': 'circle',
 		'width': 20
 	    }),
 
