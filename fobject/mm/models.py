@@ -74,6 +74,9 @@ class Alter(models.Model):
     def __unicode__(self):
         return u"%s" % self.name
 
+    class Meta:
+        verbose_name_plural = "Egos and Alters"
+
 
 class EgoEdge(models.Model):
     source = models.ForeignKey(Alter, related_name='ego_net')

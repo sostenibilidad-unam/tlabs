@@ -48,7 +48,8 @@ admin.site.register(Alter, AlterAdmin)
 class EgoEdgeAdmin(admin.ModelAdmin):
     search_fields = ['source__name', 'target__name', 'phase__phase']
     list_display = ['id', 'source', 'influence_source',
-                    'target', 'influence_target', 'distance', 'phase']
+                    'target', 'influence_target',
+                    'distance', 'polarity', 'interaction', 'phase']
 
     actions = ['copy_to_latest_phase']
 
