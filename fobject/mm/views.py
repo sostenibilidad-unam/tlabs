@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 import json
-from .models import Alter, Phase, AgencyNetwork, Action, MentalModel
+from .models import Alter, Phase, AgencyNetwork, Action, \
+    MentalModel, PowerNetwork
 from django.shortcuts import render, redirect
 from django.views import View
 
@@ -13,6 +14,12 @@ def index(request):
                'egos': Alter.objects.filter(name__startswith="TL0").all()}
 
     return render(request, 'index.html', context)
+
+
+def power_json(request):
+    g = PowerNetwork(ego_ids=request.session['ego_ids'],
+                     phase_id=request.session['phase_id'])
+    return HttpResponse(json.dumps(g.get_json()))
 
 
 def ana_json(request):
@@ -69,6 +76,20 @@ class Ana(View):
                       context)
 
 
+class Power(View):
+
+    template = 'power.html'
+
+    def get(self, request, *args, **kwargs):
+        context = {'ego_ids': request.session['ego_ids'],
+                   'title': ", ".join(
+                       [Alter.objects.get(pk=eid).name
+                        for eid in request.session['ego_ids']])}
+        return render(request,
+                      self.template,
+                      context)
+
+
 class AnaSetup(View):
 
     template = 'ana_setup.html'
@@ -96,3 +117,5 @@ class AnaSetup(View):
             return redirect('ana_view')
         elif request.POST['next'] == 'Mental Model':
             return redirect('mm_view')
+        elif request.POST['next'] == 'Power Network':
+            return redirect('power_view')

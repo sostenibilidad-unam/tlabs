@@ -51,4 +51,11 @@ urlpatterns = [
     url(r'^mm_json/$',
         views.mm_json, name='mm_json'),
 
+    url(r'^power_json/$',
+        views.power_json, name='power_json'),
+
+    url(r'^power$',
+        views.Power.as_view(),
+        name="power_view"),
+
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

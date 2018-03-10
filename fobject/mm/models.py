@@ -335,3 +335,22 @@ class MentalModel:
                'edges': [{'data': {'source': e[0],
                                    'target': e[1]}} for e in self.g.edges]}
         return net
+
+
+class PowerNetwork:
+    def __init__(self, ego_ids, phase_id):
+        phase = Phase.objects.get(pk=phase_id)
+        g = nx.Graph()
+        for ego_id in ego_ids:
+            ego = Alter.objects.get(id=ego_id)
+            h = ego.power_network(phase)
+            g = nx.compose(g, h)
+
+        self.g = g
+
+    def get_json(self):
+        net = {'nodes': [{'data': {'id': n}}
+                         for n in self.g.nodes],
+               'edges': [{'data': {'source': e[0],
+                                   'target': e[1]}} for e in self.g.edges]}
+        return net
