@@ -56,6 +56,14 @@ class Alter(models.Model):
                        e.target.name)
         return g
 
+    def power_network(self, phase):
+        g = nx.Graph()
+
+        for e in self.powers.filter(phase=phase):
+            g.add_edge(e.source.name,
+                       e.target.name)
+        return g
+
     def avatar_url(self):
         if self.avatar_pic:
             return u"%s%s" % (settings.MEDIA_URL, self.avatar_pic)
