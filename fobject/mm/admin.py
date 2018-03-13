@@ -36,6 +36,8 @@ class AlterAdmin(admin.ModelAdmin):
     search_fields = ['name']
     list_display = ['name', 'sector', 'avatar_name', 'image_tag']
 
+    list_filter = ('sector', )
+
     inlines = [EgoEdgeInline,
                ActionEdgeInline,
                PowerEdgeInline,
@@ -50,6 +52,8 @@ class EgoEdgeAdmin(admin.ModelAdmin):
     list_display = ['id', 'source', 'influence_source',
                     'target', 'influence_target',
                     'distance', 'polarity', 'interaction', 'phase']
+
+    list_filter = ('phase',)
 
     actions = ['copy_to_latest_phase']
 
@@ -73,6 +77,7 @@ admin.site.register(Category)
 
 class VariableAdmin(admin.ModelAdmin):
     list_display = ['name', 'mental_type']
+    list_filter = ('mental_type', )
 
 
 admin.site.register(Variable, VariableAdmin)
@@ -81,6 +86,7 @@ admin.site.register(Variable, VariableAdmin)
 class ActionAdmin(admin.ModelAdmin):
     search_fields = ['action', ]
     list_display = ['action', 'category', 'in_degree']
+    list_filter = ('category', )
 
 
 admin.site.register(Action, ActionAdmin)
@@ -91,6 +97,8 @@ class ActionEdgeAdmin(admin.ModelAdmin):
     list_display = ['id', 'alter', 'action', 'phase']
 
     actions = ['copy_to_latest_phase']
+
+    list_filter = ('phase',)
 
     def copy_to_latest_phase(self, request, queryset):
         phase = Phase.objects.last()
@@ -108,6 +116,8 @@ admin.site.register(ActionEdge, ActionEdgeAdmin)
 class MentalEdgeAdmin(admin.ModelAdmin):
     search_fields = ['ego__name']
     list_display = ['ego', 'source', 'target', 'phase']
+
+    list_filter = ('phase',)
 
     actions = ['copy_to_latest_phase']
 
@@ -129,6 +139,8 @@ admin.site.register(Power)
 class PowerEdgeAdmin(admin.ModelAdmin):
     search_fields = ['ego__name', 'power__name']
     list_display = ['source', 'target', 'phase']
+
+    list_filter = ('phase',)
 
     actions = ['copy_to_latest_phase']
 

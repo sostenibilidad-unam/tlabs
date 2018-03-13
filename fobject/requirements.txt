@@ -1,0 +1,4 @@
+django==1.11.6
+django-export-action
+networkx
+Pillow
