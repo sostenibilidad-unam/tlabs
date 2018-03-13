@@ -1,7 +1,6 @@
 var ego_ids = document.currentScript.getAttribute('ego_ids');
 
 $.getJSON("/power_json/", function (data) {
-    console.log(data);
     var cy = cytoscape({
 	container: document.getElementById('cy'),
 	elements: data,
@@ -9,9 +8,9 @@ $.getJSON("/power_json/", function (data) {
 	style: cytoscape.stylesheet()
 	    .selector('node')
 	    .css({
-		'shape': 'octagon',
-		'width': 60,
-		'height': 60,
+		'shape': 'data(shape)',
+		'width': 'data(width)',
+		'height': 'data(height)',
 		'border-width': 2,
 		'border-opacity': 0.666,
 		'border-color': 'grey',
@@ -19,11 +18,12 @@ $.getJSON("/power_json/", function (data) {
 		'text-valign': 'center',
 		'font-size': '1em',
 		"text-wrap": "wrap",
-		"text-max-width": 60,
+		"text-max-width": 80,
 		'background-color': '#fef',
 		'font-family': 'serif',
 		'color': 'black',
-
+		'background-image': 'data(avatar)',
+		'background-fit': 'cover'
 	    })
 	    .selector(':selected')
 	    .css({

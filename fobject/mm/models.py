@@ -60,6 +60,16 @@ class Alter(models.Model):
         g = nx.Graph()
 
         for e in self.powers.filter(phase=phase):
+            g.add_node(e.source.name,
+                       shape="ellipse",
+                       width=120,
+                       height=120,
+                       avatar=e.source.avatar_url())
+            g.add_node(e.target.name,
+                       shape="octagon",
+                       width=90,
+                       height=90)
+
             g.add_edge(e.source.name,
                        e.target.name)
         return g
@@ -349,7 +359,12 @@ class PowerNetwork:
         self.g = g
 
     def get_json(self):
-        net = {'nodes': [{'data': {'id': n}}
+        net = {'nodes': [{'data': {'id': n,
+                                   'shape': self.g.node[n]['shape'],
+                                   'width': self.g.node[n]['width'],
+                                   'height': self.g.node[n]['height'],
+                                   'avatar': "%s"
+                                   % self.g.node[n].get('avatar', '/media/')}}
                          for n in self.g.nodes],
                'edges': [{'data': {'source': e[0],
                                    'target': e[1]}} for e in self.g.edges]}
