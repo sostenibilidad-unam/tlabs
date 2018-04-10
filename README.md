@@ -6,20 +6,23 @@ Here we present a set of participatory research tools to elicit and present info
 
 <img src="Logo_Tlab.png" >
 
-[Hiveplots and dendrograms](hiveplot)
 
 [Agency Network Analysis](ANA.md)
 
 [Q-Methodology](qmethodology)
 
-
+[Hiveplots and dendrograms](hiveplot)
 
 <img src="ANA and Q.png" >
 
+More:
+
 [STEPS Centre Global Consortium - North America Hub](https://steps-centre.org/global/north-america/)
+
+[AGENCY NETWORK ANALYSIS - METHODS VIGNETTES STEPS Centre](https://steps-centre.org/pathways-methods-vignettes/agency-network-analysis/)
 
 Blogs
 - [How rethinking local people's agency could help navigate Xochimilco's troubled waters](https://steps-centre.org/blog/new-forms-agency-help-navigate-xochimilcos-troubled-waters/)
 - [A day in the chinampas](https://steps-centre.org/blog/a-day-in-the-chinampas/)
 
-[AGENCY NETWORK ANALYSIS - METHODS VIGNETTES STEPS Centre](https://steps-centre.org/pathways-methods-vignettes/agency-network-analysis/)
+
