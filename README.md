@@ -21,7 +21,7 @@ More:
 
 [STEPS Centre Methods Vignettes - AGENCY NETWORK ANALYSIS](https://steps-centre.org/pathways-methods-vignettes/agency-network-analysis/)
 
-Blogs
+  Blogs
 - [How rethinking local people's agency could help navigate Xochimilco's troubled waters](https://steps-centre.org/blog/new-forms-agency-help-navigate-xochimilcos-troubled-waters/)
 - [A day in the chinampas](https://steps-centre.org/blog/a-day-in-the-chinampas/)
 
