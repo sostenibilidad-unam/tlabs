@@ -1,0 +1,22 @@
+# Agency Network Analysis (ANA)
+
+## a. The social action arena 
+- Ego-networks - The Ego-network is illustrated as a figure with three dimensions:
+1) Alters composition - The alters composition refers to the number of alters (collaborators) with whom the ego (interviewee) collaborates, and the sector with which the alter is affiliated [civil society (yellow), academia (blue), private sector (purple), government (green)].
+2) Distance - The perceived social “distance” between the ego and each alter, representing the relative degree or intensity of collaboration (e.g. due to frequency of the interaction) from the point of view of ego (the closer to the ego, the closer the collaboration). The interviewee places each alter in one of the concentric circles around the ego in the figure.
+3) Influence and nature of relation - Arrows are then drawn between the ego and each alter. The arrows represent how the interviewee perceives the intensity and direction of influence on individuals within his/her network (from ego to alter and alter to ego); The width of the line represents the strength of the influence (ranked from 1, low influence to 3, high influence). The nature of the perceived relationship can be normatively positive (green), neutral (grey), or negative (red).
+
+
+- Action-networks - The action-net is a general bipartite or two-mode directed network that is composed of two kinds of nodes: Alters and Practices. This network presents the alters (the same as represented in the ego-net), linked by practices, e.g., those activities through which an ego interacts with one or more alter. The network is analyzed through standard network analysis techniques, for example, by calculating the degree of centrality of specific nodes (either alters or practices) in the network. In a directed graph (a graph whose edges have direction), centrality can be measured by outdegree and indegree. Outdegree of a node is the number of edges (lines-connections) which are going out from the node; Indegree of a node is the number of edges (lines-connections) which are coming into the node. Such an analysis permits two different representations of the network.
+1) Alters (Outdegree) - The degree of connections from the alters (in green) to the practices (in blue). Larger nodes represent those agents (alters) with whom the ego shares the highest number of practices. This type of visualization illustrates which alters have more social reach-scope (Figure 2a);
+2) Practices (Indegree) - The practices that the ego shares with the alters. The practices represented by larger nodes have a higher number of connections, meaning that the ego collaborates with multiple alters in that activity. The larger nodes typically are those practices (with higher indegree) that connect the ego to its closest alters in its social network (Figure 2b).
+
+## b.  The problem space
+
+- Cognitive maps are directed graphs in which connections among variables represent cause and effect interactions. To analyze and compare the interviewees’ perception of the system, we identified in each cognitive map the variables (nodes) according to their cause and effect positions properties:
+1) Transmitters - Transmitters are those variables that only affect other variables but are not affected by any other variable (Gray et al. 2014). In networks terminology, these are variable that have an indegree equal to 0 and an outdegree greater than 0. According to their outdegree, we ranked them to identify which are the most important contributors. 
+2) Receivers - The receivers are the variables that receive the influence of other variables but do not affect other variables. In networks terms, these are variables that have an outdegree equal to 0 and an indegree greater than 0. Receivers are the outputs where the issue or problem is mainly expressed. Variables ranked according to their indegree, are considered the most important receivers.
+3) Ordinary - These are variables that affect and are affected by others. For our analysis, ordinary variables are particularly relevant in processing the causal fluxes of the system. This type of variable is a special case of transmitter as it is sensitive to its context, and determined by its indegree (e.g., the variables that have influence over it). For our case, we ranked ordinary variables by measuring their betweenness- centrality. 
+
+More:
+[AGENCY NETWORK ANALYSIS](https://steps-centre.org/pathways-methods-vignettes/agency-network-analysis/)
