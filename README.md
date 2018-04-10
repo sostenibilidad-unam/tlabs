@@ -4,6 +4,7 @@ Our “Transformation laboratory” (T-Lab) is a participatory space where new a
 
 Here we present a set of participatory research tools to elicit and present information that could help agents to see their social-ecological position and role, and to identify the practices they share with others within specific social networks, and spaces of action.
 
+<img src="Logo_Tlab.png" >
 
 [Hiveplots and dendrograms](hiveplot)
 
@@ -11,7 +12,9 @@ Here we present a set of participatory research tools to elicit and present info
 
 [Q-Methodology](qmethodology)
 
-<img src="Logo_Tlab.png" >
+
+
+<img src="ANA and Q.png" >
 
 [STEPS Centre Global Consortium - North America Hub](https://steps-centre.org/global/north-america/)
 
