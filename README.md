@@ -19,7 +19,7 @@ More:
 
 [STEPS Centre Global Consortium - North America Hub](https://steps-centre.org/global/north-america/)
 
-[AGENCY NETWORK ANALYSIS - METHODS VIGNETTES STEPS Centre](https://steps-centre.org/pathways-methods-vignettes/agency-network-analysis/)
+[STEPS Centre Methods Vignettes - AGENCY NETWORK ANALYSIS](https://steps-centre.org/pathways-methods-vignettes/agency-network-analysis/)
 
 Blogs
 - [How rethinking local people's agency could help navigate Xochimilco's troubled waters](https://steps-centre.org/blog/new-forms-agency-help-navigate-xochimilcos-troubled-waters/)
