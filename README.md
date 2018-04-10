@@ -7,7 +7,7 @@ Here we present a set of participatory research tools to elicit and present info
 
 [Hiveplots and dendrograms](hiveplot)
 
-[Agency Network Analysis](ANA)
+[Agency Network Analysis](ANA.md)
 
 [Q-Methodology](qmethodology)
 
