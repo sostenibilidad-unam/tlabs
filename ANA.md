@@ -1,6 +1,6 @@
 # Agency Network Analysis (ANA)
 
-## a. The social action arena 
+## The social action arena 
 - Ego-networks - The Ego-network is illustrated as a figure with three dimensions:
 1) Alters composition - The alters composition refers to the number of alters (collaborators) with whom the ego (interviewee) collaborates, and the sector with which the alter is affiliated [civil society (yellow), academia (blue), private sector (purple), government (green)].
 2) Distance - The perceived social “distance” between the ego and each alter, representing the relative degree or intensity of collaboration (e.g. due to frequency of the interaction) from the point of view of ego (the closer to the ego, the closer the collaboration). The interviewee places each alter in one of the concentric circles around the ego in the figure.
@@ -11,8 +11,7 @@
 1) Alters (Outdegree) - The degree of connections from the alters (in green) to the practices (in blue). Larger nodes represent those agents (alters) with whom the ego shares the highest number of practices. This type of visualization illustrates which alters have more social reach-scope (Figure 2a);
 2) Practices (Indegree) - The practices that the ego shares with the alters. The practices represented by larger nodes have a higher number of connections, meaning that the ego collaborates with multiple alters in that activity. The larger nodes typically are those practices (with higher indegree) that connect the ego to its closest alters in its social network (Figure 2b).
 
-## b.  The problem space
-
+## The problem space
 - Cognitive maps are directed graphs in which connections among variables represent cause and effect interactions. To analyze and compare the interviewees’ perception of the system, we identified in each cognitive map the variables (nodes) according to their cause and effect positions properties:
 1) Transmitters - Transmitters are those variables that only affect other variables but are not affected by any other variable (Gray et al. 2014). In networks terminology, these are variable that have an indegree equal to 0 and an outdegree greater than 0. According to their outdegree, we ranked them to identify which are the most important contributors. 
 2) Receivers - The receivers are the variables that receive the influence of other variables but do not affect other variables. In networks terms, these are variables that have an outdegree equal to 0 and an indegree greater than 0. Receivers are the outputs where the issue or problem is mainly expressed. Variables ranked according to their indegree, are considered the most important receivers.
