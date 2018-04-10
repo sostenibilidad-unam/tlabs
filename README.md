@@ -19,4 +19,4 @@ Blogs
 - [How rethinking local people's agency could help navigate Xochimilco's troubled waters](https://steps-centre.org/blog/new-forms-agency-help-navigate-xochimilcos-troubled-waters/)
 - [A day in the chinampas](https://steps-centre.org/blog/a-day-in-the-chinampas/)
 
-[AGENCY NETWORK ANALYSIS - STEPS Centre website](https://steps-centre.org/pathways-methods-vignettes/agency-network-analysis/)
+[AGENCY NETWORK ANALYSIS - METHODS VIGNETTES STEPS Centre](https://steps-centre.org/pathways-methods-vignettes/agency-network-analysis/)
