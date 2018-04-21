@@ -33,7 +33,7 @@ NOTE: Bold numbers (>0.5) are the Q-sorts (rows) related with that factor (colum
  
  Z-score values that distinguish a given statement and factor are represented with a filled symbol.
  
- <img src="Rplot_4factors.png">
+ <img src="Rplot_4factors_15part.png">
 
 ## Q-statements
 
