@@ -1,6 +1,6 @@
 # TLabs - Q-Methodology
 
-Arguments: 28 statements, 14 Q-sorts, “FALSE” forced distribution, 4 factors, 
+Arguments: 28 statements, 15 Q-sorts, “FALSE” forced distribution, 4 factors, 
 varimax rotation, automatic flagging and Pearson correlation coefficient. 
 
 ## Relation between Q-sorts and factors
