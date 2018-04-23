@@ -42,7 +42,7 @@ Legal training | brown
 
 Square nodes are categories in the **Urban** meta-category, circles are in the **Agro** meta-category.
 
-Here is the [full list of practices](data/practices.csv).
+Here is the [full list of practices](../data/practices.csv).
 
 ## Clustered Egos by the Alters they share
 
