@@ -56,6 +56,18 @@ class Alter(models.Model):
                        e.target.name)
         return g
 
+    def compound_mental_model(self, phase):
+        g = nx.DiGraph()
+
+        for e in self.mentaledge_set.filter(phase=phase):
+            g.add_node(e.source.name, egos=[])
+
+            g.add_node(e.target.name, egos=[])
+
+            g.add_edge(e.source.name,
+                       e.target.name)
+        return g
+
     def power_network(self, phase):
         g = nx.Graph()
 
@@ -334,7 +346,18 @@ class MentalModel:
         for ego_id in ego_ids:
             ego = Alter.objects.get(id=ego_id)
             h = ego.mental_model(phase)
+
             g = nx.compose(g, h)
+
+        for ego_id in ego_ids:
+            ego = Alter.objects.get(id=ego_id)
+            h = ego.mental_model(phase)
+            for n in h.nodes:
+                if n in g.nodes:
+                    if 'egos' in g.node[n]:
+                        g.node[n]['egos'].append(ego)
+                    else:
+                        g.node[n]['egos'] = [ego, ]
 
         self.g = g
 
@@ -344,6 +367,24 @@ class MentalModel:
                          for n in self.g.nodes],
                'edges': [{'data': {'source': e[0],
                                    'target': e[1]}} for e in self.g.edges]}
+        return net
+
+    def get_compound_json(self):
+
+        net = {
+            'nodes': [
+                {'data': {'id': n, 'name': n}}
+                for n in self.g.nodes],
+            'edges': [{'data': {'source': e[0],
+                                'target': e[1]}} for e in self.g.edges]}
+
+        i = 0
+        for n in self.g.nodes:
+            for ego in self.g.node[n]['egos']:
+                net['nodes'].append({'data': {'id': ego.name + " " + str(i),
+                                              'name': ego.name,
+                                              'parent': n}})
+                i += 1
         return net
 
 

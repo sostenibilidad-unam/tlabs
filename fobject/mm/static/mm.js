@@ -4,46 +4,55 @@ $.getJSON("/mm_json/", function (data) {
     console.log(data);
     var cy = cytoscape({
 	container: document.getElementById('cy'),
+
+	boxSelectionEnabled: false,
+	autounselectify: true,
 	elements: data,
 
-	style: cytoscape.stylesheet()
-	    .selector('node')
-	    .css({
-		'shape': 'data(shape)',
-		'width': 290,
-		'height': 250,
-		'border-width': 10,
-		'border-opacity': 0.666,
-		'border-color': 'grey',
-		'content': 'data(id)',
-		'text-valign': 'center',
-		'font-size': '2em',
-		"text-wrap": "wrap",
-		"text-max-width": 280,
-		'background-color': '#eff',
-		'font-family': 'serif',
-		'color': 'black',
 
-	    })
-	    .selector(':selected')
-	    .css({
-		'border-width': 3,
-		'border-color': '#333'
-	    })
-	    .selector('edge')
-	    .css({
-		'curve-style': 'bezier',
-		'opacity': 0.666,
-		'line-color': 'firebrick',
-		'target-arrow-shape': 'triangle',
-		'source-arrow-shape': 'circle',
-		'width': 20
-	    }),
+  style: [
+    {
+      selector: 'node',
+      css: {
+	'content': 'data(name)',
+	'text-valign': 'center',
+	'text-halign': 'center'
+      }
+    },
+    {
+      selector: '$node > node',
+      css: {
+	'padding-top': '10px',
+	'padding-left': '10px',
+	'padding-bottom': '10px',
+	'padding-right': '10px',
+	'text-valign': 'top',
+	'text-halign': 'center',
+	'background-color': '#bbb'
+      }
+    },
+    {
+      selector: 'edge',
+      css: {
+	  'target-arrow-shape': 'triangle',
+	  'line-color': 'pink'
+      }
+    },
+    {
+      selector: ':selected',
+      css: {
+	'background-color': 'black',
+	'line-color': 'black',
+	'target-arrow-color': 'black',
+	'source-arrow-color': 'black'
+      }
+    }
+  ],
+
 
 	layout: {
-	    name: 'breadthfirst',
-	    nodeDimensionsIncludeLabels: true,
-	    fit: true,
+	    name: 'circle',
+	    animate: true,
 	    padding: 100
 	}
     });
