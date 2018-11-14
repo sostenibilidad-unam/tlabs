@@ -52,8 +52,10 @@ $.getJSON("/mm_json/", function (data) {
 
 	layout: {
 	    name: 'circle',
-	    animate: true,
-	    padding: 100
+	    animate: true, avoidOverlap: true,
+	    nodeDimensionsIncludeLabels: true,
+	    spacingFactor: 1,
+	    padding: 40
 	}
     });
 
