@@ -137,7 +137,7 @@ admin.site.register(Power)
 
 
 class PowerEdgeAdmin(admin.ModelAdmin):
-    search_fields = ['ego__name', 'power__name']
+    search_fields = ['source__name', 'target__name']
     list_display = ['source', 'target', 'phase']
 
     list_filter = ('phase',)
