@@ -229,7 +229,7 @@ class AgencyNetwork:
 
             # create network from egos to alters
             for e in ego.ego_net.filter(phase=phase):
-                if e.source.name.startswith('TL0'):
+                if e.source.name.startswith('TL'):
                     g.add_node(e.source.id,
                                name=e.source.name,
                                shape="ellipse",

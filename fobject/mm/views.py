@@ -96,7 +96,7 @@ class AnaSetup(View):
 
     context = {'phases': Phase.objects.all(),
                'title': 'T-Labs',
-               'egos': Alter.objects.filter(name__startswith="TL0").all()}
+               'egos': Alter.objects.filter(name__startswith="TL").all()}
 
     def get(self, request, *args, **kwargs):
         return render(request,
