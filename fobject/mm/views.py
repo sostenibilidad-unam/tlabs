@@ -45,7 +45,7 @@ def view_action(request, action_id):
 def mm_json(request):
     mm = MentalModel(ego_ids=request.session['ego_ids'],
                      phase_id=request.session['phase_id'])
-    return HttpResponse(json.dumps(mm.get_json()))
+    return HttpResponse(json.dumps(mm.get_compound_json()))
 
 
 class MMView(View):
