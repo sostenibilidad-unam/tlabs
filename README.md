@@ -24,5 +24,7 @@ More:
   Blogs
 - [How rethinking local people's agency could help navigate Xochimilco's troubled waters](https://steps-centre.org/blog/new-forms-agency-help-navigate-xochimilcos-troubled-waters/)
 - [A day in the chinampas](https://steps-centre.org/blog/a-day-in-the-chinampas/)
+- [Creating bridges in Xochimilco through the “Pathways to Sustainability Game"](https://steps-centre.org/blog/creating-bridges-through-the-pathways-to-sustainability-game/)
 
-
+Oikos=
+- [Xochimilco y sus chinampas: lecciones del sismo del 19 de septiembre, 2017](http://lancis.ecologia.unam.mx/showcase/xochimilco_postsismo/)
