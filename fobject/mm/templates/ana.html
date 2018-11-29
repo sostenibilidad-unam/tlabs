@@ -22,8 +22,9 @@
 <h1 class="ui header">{{ title }}</h1>
 
 <div id="cy" class="ui fluid"></div>
-<script src="{% static 'ana.js' %}"
-	ego_ids="{{ ego_ids }}">
+<script
+  src="{% if layout == 'cose' %}{% static 'ana_cose.js' %}{% else %}{% static 'ana_dagre.js' %}{% endif %}"
+  ego_ids="{{ ego_ids }}">
 </script>
 
 {% endblock %}
