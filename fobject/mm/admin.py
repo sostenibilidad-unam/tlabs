@@ -55,7 +55,7 @@ class EgoEdgeAdmin(admin.ModelAdmin):
 
     list_filter = ('phase',)
 
-    actions = ['copy_to_latest_phase']
+    actions = ['copy_to_latest_phase', 'recursive_copy_to_latest_phase']
 
     def copy_to_latest_phase(self, request, queryset):
         phase = Phase.objects.last()
@@ -65,6 +65,36 @@ class EgoEdgeAdmin(admin.ModelAdmin):
             edge.save()
     copy_to_latest_phase.\
         short_description = "Copy selected edges to latest phase"
+
+    def recursive_copy_to_latest_phase(self, request, queryset):
+        phase = Phase.objects.last()
+        for edge in queryset:
+            # copy ego edge
+            edge.pk = None
+            edge.phase = phase
+            edge.save()
+
+            # copy action edges
+            for action_edge in edge.target.action_set.all():
+                action_edge.pk = None
+                action_edge.phase = phase
+                action_edge.save()
+
+            # copy mental model
+            for mental_edge in edge.source.mentaledge_set.all():
+                mental_edge.pk = None
+                mental_edge.phase = phase
+                mental_edge.save()
+
+            # copy power edges
+            for power_edge in edge.source.powers.all():
+                power_edge.pk = None
+                power_edge.phase = phase
+                power_edge.save()
+    recursive_copy_to_latest_phase.\
+        short_description = "Recursive copy selected edges to latest " \
+                            + "phase (include actions, mental model, " \
+                            + "and powers)"
 
 
 admin.site.register(EgoEdge, EgoEdgeAdmin)
