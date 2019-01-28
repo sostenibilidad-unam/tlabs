@@ -4,6 +4,9 @@ import os
 import sys
 import argparse
 import svgwrite
+from math import sin, cos, radians
+from scale import Scale
+from pyveplot import Hiveplot, Node, Axis
 
 
 parser = argparse.ArgumentParser(
@@ -12,6 +15,10 @@ parser = argparse.ArgumentParser(
 parser.add_argument('sector',
                     default='all',
                     help='plot which sector')
+
+parser.add_argument('phase',
+                    help='plot which phase')
+
 
 args = parser.parse_args()
 
@@ -24,22 +31,21 @@ if __name__ == '__main__':
     import django
     django.setup()
 
-
-from mm.models import Alter, Action, Category, Sector, Agency, Networks
+    from mm.models import Alter, Category, ActionEdge, Networks, Phase
 
 n = Networks()
 n.update_alter_metrics()
 n.update_action_metrics()
 
-from math import sin, cos, radians
-from scale import Scale
-from pyveplot import Hiveplot, Node, Axis
 
+
+phase = Phase.objects.get(phase=args.phase)
 
 if args.sector == "all":
-    h = Hiveplot('agency_actioncats_joined.svg')
+    h = Hiveplot('agency_actioncats_joined_%s.svg' % phase.phase)
 else:
-    h = Hiveplot('%s_actioncats_joined.svg' % args.sector)
+    h = Hiveplot('%s_actioncats_joined_%s.svg' % (args.sector, phase.phase))
+
 
 
 def rotate(radius, angle, origin=(0, 0)):
@@ -49,12 +55,14 @@ def rotate(radius, angle, origin=(0, 0)):
             origin[1] + round((radius * sin(radians(angle))), 2))
 
 
-sector_color = {'Academia': 'blue',
-                'Gobierno': 'green',
-                None: 'orange',
-                'Otros': 'purple',
-                'Privado': 'purple',
-                'Sociedad_Civil': 'yellow'}
+sector_color = {
+    'Ego': '#e41a1c',
+    'Academia': '#377eb8',
+    'Gobierno': '#4daf4a',
+    None: '#984ea3',
+    'Otros': '#ff7f00',
+    'Privado': '#ffff33',
+    'Sociedad_Civil': '#a65628'}
 
 
 offcenter = 80
@@ -314,7 +322,7 @@ h.axes = [axis_egos, ] + alter_axes + [axis_actions, ]
 # link egos
 for ego in Alter.objects.filter(name__contains='TL0').all():
     # grab their ego net
-    for edge in ego.ego_net.all():
+    for edge in ego.ego_net.filter(phase=phase):
         alter = edge.target
         for alter_axis in alter_axes:
             if alter in alter_axis.nodes \
@@ -330,7 +338,7 @@ for ego in Alter.objects.filter(name__contains='TL0').all():
 
 
 # create links for agencies
-for a in Agency.objects.all():
+for a in ActionEdge.objects.filter(phase=phase):
     for alter_axis in alter_axes:
         if a.alter in alter_axis.nodes \
            and a.action.category in axis_actions.nodes\
