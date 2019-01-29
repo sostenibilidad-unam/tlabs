@@ -159,8 +159,8 @@ class Action(models.Model):
 
     in_degree = models.IntegerField(default=0)
 
-    def update_in_degree(self):
-        self.in_degree = self.actor_set.count()
+    def update_in_degree(self, phase):
+        self.in_degree = self.actor_set.filter(phase=phase).count()
 
     def __unicode__(self):
         return u"%s" % self.action
@@ -211,11 +211,12 @@ class MentalEdge(models.Model):
 
 
 class Networks:
-    def __init__(self):
+    def __init__(self, phase):
 
+        self.phase = phase
         self.alter = nx.Graph()
 
-        for e in EgoEdge.objects.all():
+        for e in EgoEdge.objects.filter(phase=phase):
             self.alter.add_edge(e.source, e.target,
                                 distance=e.distance,
                                 interaction=e.interaction)
@@ -228,7 +229,7 @@ class Networks:
 
     def update_action_metrics(self):
         for a in Action.objects.all():
-            a.update_in_degree()
+            a.update_in_degree(self.phase)
             a.save()
 
 

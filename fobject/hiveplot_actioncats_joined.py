@@ -44,7 +44,7 @@ if args.egos is not None:
 else:
     egos = None
 
-n = Networks()
+n = Networks(phase)
 n.update_alter_metrics()
 n.update_action_metrics()
 
