@@ -259,18 +259,18 @@ class AgencyNetwork:
                                height=100,
                                href='/alter/%s/' % e.source.id,
                                scolor=colors.sector_color(e.source))
-                    for action_e in ActionEdge.objects.filter(
-                            alter=e.source).filter(phase=phase):
-                        g.add_node(action_e.action.action,
-                                   name=action_e.action.action,
-                                   shape='rectangle',
-                                   width=160,
-                                   height=100,
-                                   href='/action/%s/' % action_e.action.id,
-                                   scolor=colors.practice_color(
-                                       action_e.action))
-                        g.add_edge(action_e.alter.id,
-                                   action_e.action.action)
+                for action_e in ActionEdge.objects.filter(
+                        alter=e.source).filter(phase=phase):
+                    g.add_node(action_e.action.action,
+                               name=action_e.action.action,
+                               shape='rectangle',
+                               width=160,
+                               height=100,
+                               href='/action/%s/' % action_e.action.id,
+                               scolor=colors.practice_color(
+                                   action_e.action))
+                    g.add_edge(action_e.alter.id,
+                               action_e.action.action)
 
                 if e.target.name.startswith('TL0'):
                     g.add_node(e.target.id,
@@ -289,18 +289,18 @@ class AgencyNetwork:
                                height=100,
                                href='/alter/%s/' % e.target.id,
                                scolor=colors.sector_color(e.target))
-                    for action_e in ActionEdge.objects.filter(
-                            alter=e.target).filter(phase=phase):
-                        g.add_node(action_e.action.action,
-                                   name=action_e.action.action,
-                                   shape='rectangle',
-                                   width=160,
-                                   height=100,
-                                   href='/action/%s/' % action_e.action.id,
-                                   scolor=colors.practice_color(
-                                       action_e.action))
-                        g.add_edge(action_e.alter.id,
-                                   action_e.action.action)
+                for action_e in ActionEdge.objects.filter(
+                        alter=e.target).filter(phase=phase):
+                    g.add_node(action_e.action.action,
+                               name=action_e.action.action,
+                               shape='rectangle',
+                               width=160,
+                               height=100,
+                               href='/action/%s/' % action_e.action.id,
+                               scolor=colors.practice_color(
+                                   action_e.action))
+                    g.add_edge(action_e.alter.id,
+                               action_e.action.action)
 
                 g.add_edge(e.source.id,
                            e.target.id,
