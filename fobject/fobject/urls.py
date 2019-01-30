@@ -32,7 +32,7 @@ urlpatterns = [
         views.AnaSetup.as_view(),
         name="ana_setup"),
 
-    url(r'^ana$',
+    url(r'^ana/(?P<layout>.+)/$',
         views.Ana.as_view(),
         name="ana_view"),
 

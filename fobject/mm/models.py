@@ -159,8 +159,8 @@ class Action(models.Model):
 
     in_degree = models.IntegerField(default=0)
 
-    def update_in_degree(self):
-        self.in_degree = self.actor_set.count()
+    def update_in_degree(self, phase):
+        self.in_degree = self.actor_set.filter(phase=phase).count()
 
     def __unicode__(self):
         return u"%s" % self.action
@@ -211,11 +211,12 @@ class MentalEdge(models.Model):
 
 
 class Networks:
-    def __init__(self):
+    def __init__(self, phase):
 
+        self.phase = phase
         self.alter = nx.Graph()
 
-        for e in EgoEdge.objects.all():
+        for e in EgoEdge.objects.filter(phase=phase):
             self.alter.add_edge(e.source, e.target,
                                 distance=e.distance,
                                 interaction=e.interaction)
@@ -228,7 +229,7 @@ class Networks:
 
     def update_action_metrics(self):
         for a in Action.objects.all():
-            a.update_in_degree()
+            a.update_in_degree(self.phase)
             a.save()
 
 
@@ -258,18 +259,18 @@ class AgencyNetwork:
                                height=100,
                                href='/alter/%s/' % e.source.id,
                                scolor=colors.sector_color(e.source))
-                    for action_e in ActionEdge.objects.filter(
-                            alter=e.source).filter(phase=phase):
-                        g.add_node(action_e.action.action,
-                                   name=action_e.action.action,
-                                   shape='rectangle',
-                                   width=160,
-                                   height=100,
-                                   href='/action/%s/' % action_e.action.id,
-                                   scolor=colors.practice_color(
-                                       action_e.action))
-                        g.add_edge(action_e.alter.id,
-                                   action_e.action.action)
+                for action_e in ActionEdge.objects.filter(
+                        alter=e.source).filter(phase=phase):
+                    g.add_node(action_e.action.action,
+                               name=action_e.action.action,
+                               shape='rectangle',
+                               width=160,
+                               height=100,
+                               href='/action/%s/' % action_e.action.id,
+                               scolor=colors.practice_color(
+                                   action_e.action))
+                    g.add_edge(action_e.alter.id,
+                               action_e.action.action)
 
                 if e.target.name.startswith('TL0'):
                     g.add_node(e.target.id,
@@ -288,18 +289,18 @@ class AgencyNetwork:
                                height=100,
                                href='/alter/%s/' % e.target.id,
                                scolor=colors.sector_color(e.target))
-                    for action_e in ActionEdge.objects.filter(
-                            alter=e.target).filter(phase=phase):
-                        g.add_node(action_e.action.action,
-                                   name=action_e.action.action,
-                                   shape='rectangle',
-                                   width=160,
-                                   height=100,
-                                   href='/action/%s/' % action_e.action.id,
-                                   scolor=colors.practice_color(
-                                       action_e.action))
-                        g.add_edge(action_e.alter.id,
-                                   action_e.action.action)
+                for action_e in ActionEdge.objects.filter(
+                        alter=e.target).filter(phase=phase):
+                    g.add_node(action_e.action.action,
+                               name=action_e.action.action,
+                               shape='rectangle',
+                               width=160,
+                               height=100,
+                               href='/action/%s/' % action_e.action.id,
+                               scolor=colors.practice_color(
+                                   action_e.action))
+                    g.add_edge(action_e.alter.id,
+                               action_e.action.action)
 
                 g.add_edge(e.source.id,
                            e.target.id,

@@ -55,7 +55,7 @@ class EgoEdgeAdmin(admin.ModelAdmin):
 
     list_filter = ('phase',)
 
-    actions = ['copy_to_latest_phase']
+    actions = ['copy_to_latest_phase', ]
 
     def copy_to_latest_phase(self, request, queryset):
         phase = Phase.objects.last()
@@ -65,6 +65,7 @@ class EgoEdgeAdmin(admin.ModelAdmin):
             edge.save()
     copy_to_latest_phase.\
         short_description = "Copy selected edges to latest phase"
+
 
 
 admin.site.register(EgoEdge, EgoEdgeAdmin)

@@ -4,14 +4,24 @@ import os
 import sys
 import argparse
 import svgwrite
+from math import sin, cos, radians
+from scale import Scale
+from pyveplot import Hiveplot, Node, Axis
 
 
 parser = argparse.ArgumentParser(
     description="create tlabs hiveplot")
 
-parser.add_argument('sector',
+parser.add_argument('--sector',
                     default='all',
                     help='plot which sector')
+
+parser.add_argument('--phase', required=True,
+                    help='plot which phase')
+
+parser.add_argument('--egos', nargs="+",
+                    help='just plot these egos')
+
 
 args = parser.parse_args()
 
@@ -24,22 +34,28 @@ if __name__ == '__main__':
     import django
     django.setup()
 
+    from mm.models import Alter, Category, ActionEdge, Networks, Phase
 
-from mm.models import Alter, Action, Category, Sector, Agency, Networks
+phase = Phase.objects.get(phase=args.phase)
 
-n = Networks()
+if args.egos is not None:
+    egos = [Alter.objects.get(name=ego_name)
+            for ego_name in args.egos]
+else:
+    egos = None
+
+n = Networks(phase)
 n.update_alter_metrics()
 n.update_action_metrics()
 
-from math import sin, cos, radians
-from scale import Scale
-from pyveplot import Hiveplot, Node, Axis
 
-
-if args.sector == "all":
-    h = Hiveplot('agency_actioncats_joined.svg')
+if egos is None:
+    name = "ana_hiveplot_%s.svg" % args.phase
 else:
-    h = Hiveplot('%s_actioncats_joined.svg' % args.sector)
+    name = "ana_hiveplot_%s_%s.svg" % (args.phase,
+                                       "-".join(args.egos))
+
+h = Hiveplot(name)
 
 
 def rotate(radius, angle, origin=(0, 0)):
@@ -49,12 +65,16 @@ def rotate(radius, angle, origin=(0, 0)):
             origin[1] + round((radius * sin(radians(angle))), 2))
 
 
-sector_color = {'Academia': 'blue',
-                'Gobierno': 'green',
-                None: 'orange',
-                'Otros': 'purple',
-                'Privado': 'purple',
-                'Sociedad_Civil': 'yellow'}
+sector_color = {
+    'Ego': '#e41a1c',
+    'Academia': '#377eb8',
+    'Gobierno': '#4daf4a',
+    None: '#984ea3',
+    'Otros': '#ff7f00',
+    'Privado': '#ffff33',
+    'Sociedad_Civil': '#cab2d6'
+
+}
 
 
 offcenter = 80
@@ -183,28 +203,29 @@ axis_actions = Axis(action_axis_origin,
                     stroke="black",
                     stroke_opacity="0.33", stroke_width=1)
 
+# '#cab2d6','#6a3d9a','#ffff99','#b15928']
 
 action_cat_color = {
-    'Research': 'darkcyan',
-    'Training': 'firebrick',
-    'Agricultural/ecological training': 'orange',
-    'Outreach': 'green',
-    'Market': 'blue',
-    'Education': 'teal',
-    'Funding': 'grey',
-    'Collaboration': 'red',
-    'Financial/commercial training': 'yellow',
-    'Social organization': 'cornflowerblue',
-    'Tourism': 'forestgreen',
-    'Management': 'dodgerblue',
-    'Networking': 'goldenrod',
-    'Production': 'midnightblue',
-    'Construction': 'darkgreen',
-    'Culture': 'cyan',
-    'Consultancy': 'hotpink',
-    'Ecological conservation': 'lightcoral',
-    'Citizen assistance': 'indigo',
-    'Legal training': 'brown',
+    'Research': '#8dd3c7',
+    'Training': '#ffffb3',
+    'Agricultural/ecological training': '#bebada',
+    'Outreach': '#fb8072',
+    'Market': '#80b1d3',
+    'Education': '#fdb462',
+    'Funding': '#b3de69',
+    'Collaboration': '#fccde5',
+    'Financial/commercial training': '#d9d9d9',
+    'Social organization': '#bc80bd',
+    'Tourism': '#ccebc5',
+    'Management': '#ffed6f',
+    'Networking': '#a6cee3',
+    'Production': '#1f78b4',
+    'Construction': '#b2df8a',
+    'Culture': '#33a02c',
+    'Consultancy': '#fb9a99',
+    'Ecological conservation': '#e31a1c',
+    'Citizen assistance': '#fdbf6f',
+    'Legal training': '#ff7f00'
 }
 
 
@@ -314,36 +335,46 @@ h.axes = [axis_egos, ] + alter_axes + [axis_actions, ]
 # link egos
 for ego in Alter.objects.filter(name__contains='TL0').all():
     # grab their ego net
-    for edge in ego.ego_net.all():
+    for edge in ego.ego_net.filter(phase=phase):
         alter = edge.target
         for alter_axis in alter_axes:
-            if alter in alter_axis.nodes \
-               and (args.sector == 'all'
-                    or alter.sector.name == args.sector):
-                h.connect(axis_egos, ego,
-                          45,
-                          alter_axis, alter,
-                          -15,
-                          stroke_width=edge.distance * 2.0,
-                          stroke_opacity=0.33,
-                          stroke=sector_color[alter.sector.name],)
+            if egos is None or ego in egos:
+                if alter in alter_axis.nodes \
+                   and (args.sector == 'all'
+                        or alter.sector.name == args.sector):
+                    h.connect(axis_egos, ego,
+                              45,
+                              alter_axis, alter,
+                              -15,
+                              stroke_width=edge.distance * 2.0,
+                              stroke_opacity=0.33,
+                              stroke=sector_color[alter.sector.name],)
 
+
+# create set of actions reached by args.egos
+action_edges = []
+for ae in ActionEdge.objects.filter(phase=phase):
+    for ee in ae.alter.ego_net.filter(phase=phase):
+        if egos is not None and (ee.source in egos or ee.target in egos):
+            action_edges.append(ae)
 
 # create links for agencies
-for a in Agency.objects.all():
+for a in ActionEdge.objects.filter(phase=phase):
     for alter_axis in alter_axes:
-        if a.alter in alter_axis.nodes \
-           and a.action.category in axis_actions.nodes\
-           and (args.sector == "all" or a.alter.sector.name == args.sector):
-            color = action_cat_color[a.action.category.name]
-            opacity = 0.5
-            h.connect(alter_axis, a.alter,
-                      33,
-                      axis_actions, a.action.category,
-                      -40,
-                      stroke_width=1.5,
-                      stroke_opacity=opacity,
-                      stroke=color)
+        if a in action_edges or action_edges == []:
+            if a.alter in alter_axis.nodes \
+               and a.action.category in axis_actions.nodes\
+               and (args.sector == "all"
+                    or a.alter.sector.name == args.sector):
+                color = action_cat_color[a.action.category.name]
+                opacity = 0.5
+                h.connect(alter_axis, a.alter,
+                          33,
+                          axis_actions, a.action.category,
+                          -40,
+                          stroke_width=1.5,
+                          stroke_opacity=opacity,
+                          stroke=color)
 
 
 h.save()

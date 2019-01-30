@@ -68,6 +68,7 @@ class Ana(View):
 
     def get(self, request, *args, **kwargs):
         context = {'ego_ids': request.session['ego_ids'],
+                   'layout': kwargs['layout'],
                    'title': ", ".join(
                        [Alter.objects.get(pk=eid).name
                         for eid in request.session['ego_ids']])}
@@ -113,8 +114,10 @@ class AnaSetup(View):
         request.session['ego_ids'] = ego_ids
         request.session['phase_id'] = request.POST['phase']
 
-        if request.POST['next'] == 'Agency Network':
-            return redirect('ana_view')
+        if request.POST['next'] == 'Agency Network Dagre':
+            return redirect('ana_view', layout='dagre')
+        elif request.POST['next'] == 'Agency Network Cose':
+            return redirect('ana_view', layout='cose')            
         elif request.POST['next'] == 'Mental Model':
             return redirect('mm_view')
         elif request.POST['next'] == 'Power Network':
