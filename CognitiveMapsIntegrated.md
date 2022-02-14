@@ -4,3 +4,7 @@ Principal components of each narrative:
 Drivers (variables with higher outdegree & with higher distance between outdegree and indegree); 
 Connectors (variables with higher betweenness centrality); and, 
 Receptors (variables with higher indegree and with higher distance between indegree and outdegree).
+
+<img src="Table 2.png">
+------------------------
+<img src="Table 3.png">
