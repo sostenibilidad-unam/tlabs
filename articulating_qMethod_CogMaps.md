@@ -1,7 +1,5 @@
 # TLabs - Articulating the results of the Q-Methodology and the Cognitive Maps
 
-## Relation between ....
-
 
 | Meta-narratives from Q-Methodology | Agriculture viability _T0_ | Heritage relevance _T0_ | Urban and agricultural balance _T0_ | Wetland resilience _T0_ | Urbanization incompatible _T1_ | Generational shift in priorities _T1_ | Urban empathy _T1_ | Rooted identity _T1_ |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
