@@ -4,6 +4,6 @@ Principal components of each narrative: <br /> _Drivers_ (variables with higher 
 <br /> _Connectors_ (variables with higher betweenness centrality); and, 
 <br /> _Receptors_ (variables with higher indegree and with higher distance between indegree and outdegree).
 
-<img src="Table 2.png">
+<img src="Table A.png">
 ------------------------
-<img src="Table 3.png">
+<img src="Table B.png">
