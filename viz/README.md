@@ -29,6 +29,8 @@ The out-degree centrality for a node is the fraction of nodes its
 outgoing edges are connected to. Decrease in out-degree centrality for
 some source nodes may be explained by an increase in connections.
 
+### Structural metrics diff
+
 | var                      | **T0**              | **T1**              |
 |--------------------------|---------------------|---------------------|
 | nodes                    | 17                  | 24                  |
@@ -37,6 +39,8 @@ some source nodes may be explained by an increase in connections.
 | avg. number of neighbors | 2.3529411764705883  | 2.25                |
 
 ![Parallel coordinates plot](circos/nw_stats_pc.png)
+
+#### Out degree centrality in T0 vs T1
 
 ![Out degree centrality in t0 vs t1 barplot](circos/out_degree_centrality.png)
 
