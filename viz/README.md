@@ -25,9 +25,6 @@ decreases, which means that although there are more nodes, there
 aren't many new connections. This is also why network density
 decreases.
 
-The out-degree centrality for a node is the fraction of nodes its
-outgoing edges are connected to. Decrease in out-degree centrality for
-some source nodes may be explained by an increase in connections.
 
 ### Structural metrics diff
 
@@ -40,7 +37,14 @@ some source nodes may be explained by an increase in connections.
 
 ![Parallel coordinates plot](circos/nw_stats_pc.png)
 
-#### Out degree centrality in T0 vs T1
+Red curve is T1, blue curve is T0.
+
+### Out degree centrality in T0 vs T1
+
+The out-degree centrality for a node is the fraction of nodes its
+outgoing edges are connected to. Decrease in out-degree centrality for
+some source nodes may be explained by an increase in connections.
+
 
 ![Out degree centrality in t0 vs t1 barplot](circos/out_degree_centrality.png)
 
