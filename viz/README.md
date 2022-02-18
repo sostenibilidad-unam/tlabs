@@ -11,7 +11,10 @@ other end of the connected ribbon. Ribbons in black show reported
 shared actions and collaborations after the 2017 earthquake in
 T1.
 
+## T0
 ![T0](circos/t0/results/circos_labels_noticks.png)
+
+## T1
 ![T1](circos/t1/results/circos_labels_noticks.png)
 
 ## Network growth
@@ -26,11 +29,12 @@ The out-degree centrality for a node is the fraction of nodes its
 outgoing edges are connected to. Decrease in out-degree centrality for
 some source nodes may be explained by an increase in connections.
 
-var   || **T0**  || **T1**
-nodes || 17  || 24
-edges || 20  || 27
-density || 0.07352941176470588 || 0.04891304347826087
-avg. number of neighbors || 2.3529411764705883 || 2.25
+| var                      | **T0**              | **T1**              |
+|--------------------------|---------------------|---------------------|
+| nodes                    | 17                  | 24                  |
+| edges                    | 20                  | 27                  |
+| density                  | 0.07352941176470588 | 0.04891304347826087 |
+| avg. number of neighbors | 2.3529411764705883  | 2.25                |
 
 ![Parallel coordinates plot](circos/nw_stats_pc.png)
 
@@ -45,8 +49,8 @@ fed the adjacency matrix of the agency network.
 
 To generate you must install [Circos Plot](http://circos.ca/) and then run:
 
-'''
+```
 cd circos/tdiff
 /path/to/circos -conf etc/circos.conf
-'''
+```
 
