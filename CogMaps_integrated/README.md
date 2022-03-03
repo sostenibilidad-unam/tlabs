@@ -5,8 +5,8 @@ Principal components of each narrative: <br /> _Drivers_ (variables with higher 
 <br /> _Receptors_ (variables with higher indegree and with higher distance between indegree and outdegree).
 
 ## Table A. Cognitive maps metrics per meta narrative in T0
-<img src="Table A.png">
+<img src="Table_A.png">
 ------------------------
 
 ## Table B. Cognitive maps metrics per meta narrative in T1
-<img src="Table B.png">
+<img src="Table_B.png">
