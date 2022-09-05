@@ -72,7 +72,7 @@ _Livelihoods:_
 
 24.- The sons of chinampa producers are looking for different jobs.
 
-The Q-Methodology was applied to the 13 participants in two moments, T0 for the baseline narratives, and T1 for the potential change in narratives. All participants Q-sorts, were statistically analyzed with the software RStudio version 1.0.136 (R Core Team 2016) using the qmethod package for R (Zabala 2014). Statistical Q-analysis is based in a factor analysis to find clusters of shared visions or perspectives of an issue by looking for individual patterns in each Q-sort, and using the analytical principle of correlation between individuals to find engagement or disengagement on a statement (Zabala 2014). The analysis reduces the perspectives in factors, a set of new parameters that represent an idealized Q-sort that summarizes the perspectives of the group (Webler et al. 2009). The number of factors depends on the number of Q-statements and Q-sorts, ideally the study must have a 3:1 ratio, respectively. In our case, the numbers did not match the suggested ratio, however, the Q-methodology researchers agreed to have a tolerance for the number of Q-statements and Q-sorts (Webler et al. 2009). For our analysis, we used 4 factors whose configurations of statements were later interpreted as meta-narratives.
+The Q-Methodology was applied to the 13 participants in two moments, T0 for the baseline narratives, and T1 for the potential change in narratives. All participants Q-sorts, were statistically analyzed with the software RStudio version 1.0.136 (R Core Team 2016) using the qmethod package for R (Zabala 2014). Statistical Q-analysis is based in a factor analysis to find clusters of shared visions or perspectives of an issue by looking for individual patterns in each Q-sort, and using the analytical principle of correlation to find engagement or disengagement on a statement (Zabala 2014). The analysis reduces the perspectives in factors, a set of new parameters that represent an idealized Q-sort that summarizes the perspectives of the group (Webler et al. 2009). The number of factors depends on the number of Q-statements and Q-sorts, ideally the study must have a 3:1 ratio, respectively. In our case, the numbers did not match the suggested ratio, however, the Q-methodology researchers agreed to have a tolerance for the number of Q-statements and Q-sorts (Webler et al. 2009). For our analysis, we used 4 factors whose configurations of statements were later interpreted as meta-narratives.
 
 References:
 -	R Core Team (2020). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. https://www.R-project.org/
@@ -87,7 +87,7 @@ Arguments for the statistical Q-analysis T0: 28 statements, 15 Q-sorts, “FALSE
 
 ***Table 1. Q-sort factor loadings for Q-methodology T0.***
 
-_Factor loadings for Q-sorts indicates the relationship between each Q-sort and component or factor. Factors result in the meta-narratives described below. Italic numbers (>0.5) are the Q-sorts (rows) associated with that factor (columns)._
+_Factor loadings for Q-sorts indicates the relationship between each Q-sort and component or factor. Factors are interpreted as the meta-narratives described below. Italic numbers (>0.5) are the Q-sorts (rows) significantly loaded into a factor (columns)._
 
 |Participants	 |Factor 1	 |Factor 2	 |Factor 3	 |Factor 4  |
 |---------------|-------|-------|-------|------|
@@ -256,7 +256,7 @@ Arguments for the statistical Q-analysis T1: 28 statements, 13 Q-sorts, “FALSE
 
 ***Table 3. Q-sort factor loadings for Q-methodology T1.***
 
-_Factor loadings for Q-sorts indicates the relationship between each Q-sort and component or factor. Factors result in the meta-narratives described below. Italic numbers (>0.5) are the Q-sorts (rows) or participants associated with that factor (columns)._
+_Factor loadings for Q-sorts indicates the relationship between each Q-sort and component or factor. Factors are interpreted as the meta-narratives described below. Italic numbers (>0.5) are the Q-sorts (rows) significantly loaded into a factor (columns)._
 
 |Participant	|Factor 1	|Factor 2	|Factor 3	|Factor 4
 |---------------|-------|-------|-------|-------|
